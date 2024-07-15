@@ -1,0 +1,9 @@
+.videoCallContainer {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid darkred;
+  width: 100%;
+}
+
+.mediaControllerContainer {
+}
