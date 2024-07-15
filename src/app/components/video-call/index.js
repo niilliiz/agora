@@ -20,11 +20,11 @@ export default function VideoCall() {
         setCalling={() => {
           setCalling(a => !a);
         }}
-        setCamera={() => {
-          setCamera(a => !a);
+        setCameraOn={() => {
+          setCameraOn(a => !a);
         }}
-        setMic={() => {
-          setMic(a => !a);
+        setMicOn={() => {
+          setMicOn(a => !a);
         }}
       />
     </div>

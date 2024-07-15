@@ -7,8 +7,25 @@ export default function MediaControllers({
   cameraOn,
   micOn,
   setCalling,
-  setCamera,
-  setMic,
+  setCameraOn,
+  setMicOn,
 }) {
-  return <div className={styles.mediaControllerContainer}></div>;
+  return (
+    <div className={styles.mediaControllerContainer}>
+      <div className={styles.controllersContainer}>
+        <button className={styles.controllerButton} onClick={() => setMicOn()}>
+          {micOn ? "🎤" : "🔇"}
+        </button>
+
+        <button className={styles.controllerButton} onClick={() => setCameraOn()}>
+          {cameraOn ? "📷" : "🚫"}
+        </button>
+      </div>
+      <div className={styles.callContainer}>
+        <button className={styles.controllerButton} onClick={() => setCalling()}>
+          {calling ? "🔴" : "🟢"}
+        </button>
+      </div>
+    </div>
+  );
 }
