@@ -1,12 +1,16 @@
 import { useState } from "react";
-import { useJoin } from "agora-rtc-react";
+import {
+  useJoin,
+  useRemoteAudioTracks,
+  useRemoteUsers,
+  useRemoteVideoTracks,
+} from "agora-rtc-react";
 
 import MediaControllers from "@/app/components/media-controllers";
 
 import { appConfig } from "@/utils/app-config";
 
 import styles from "./video-call.module.css";
-import Client from "@/app/components/client";
 
 export default function VideoCall() {
   const [calling, setCalling] = useState(false);
@@ -17,6 +21,16 @@ export default function VideoCall() {
     { appid: appConfig.appId, channel: appConfig.channel, token: appConfig.token },
     calling,
   );
+
+  const remoteUsers = useRemoteUsers();
+  const { videoTracks } = useRemoteVideoTracks(remoteUsers);
+  const { audioTracks } = useRemoteAudioTracks(remoteUsers);
+
+  audioTracks.map(track => track.play());
+
+  console.log("remoteUsers", remoteUsers);
+  console.log("videoTracks", videoTracks);
+  console.log("audioTracks", audioTracks);
 
   console.log("data", data);
   console.log("isLoading", isLoading);
