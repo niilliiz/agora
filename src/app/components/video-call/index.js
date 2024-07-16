@@ -11,6 +11,7 @@ import MediaControllers from "@/app/components/media-controllers";
 import { appConfig } from "@/utils/app-config";
 
 import styles from "./video-call.module.css";
+import Room from "@/app/components/room";
 
 export default function VideoCall() {
   const [calling, setCalling] = useState(false);
@@ -39,7 +40,15 @@ export default function VideoCall() {
 
   return (
     <div className={styles.videoCallContainer}>
-      <div>video call</div>
+      {calling ? (
+        <Room
+          cameraOn={cameraOn}
+          micOn={micOn}
+          // renderRemoteUsers={() => <RenderRemoteUsers videoTracks={videoTracks} />}
+        />
+      ) : (
+        <div>not calling</div>
+      )}
       <MediaControllers
         calling={calling}
         cameraOn={cameraOn}
