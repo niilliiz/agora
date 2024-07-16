@@ -66,3 +66,24 @@ export default function VideoCall() {
     </div>
   );
 }
+
+/*
+ * preview page
+ * permission for camera v mic
+ * how we detect if remote user has been joined
+ * turn off the camera light if one turns off the camera
+ * switch the camera front and back
+ * handle leaving the room
+ * handle the users information remote and local
+ * handle rejoining the room
+ * handle the users generally
+ * timout for session
+ * if it's possible, implement chat in video call
+ * handle unmount of the component
+ * ui of preview
+ * ui of video call
+ * ui of the media controllers
+ * handle toggle the local mic and camera
+ * handle toggle the remote mic and camera
+ * we only have 2 users in the room
+ * */
