@@ -1,6 +1,7 @@
-// "use client";
+"use client";
 import styles from "./page.module.css";
 import VideoCall from "@/app/components/video-call";
+import Client from "@/app/components/client";
 
 // import AgoraRTC from "agora-rtc-sdk-ng";
 // AgoraRTC.setLogLevel(0);
@@ -8,7 +9,9 @@ import VideoCall from "@/app/components/video-call";
 export default function Home() {
   return (
     <main className={styles.main}>
-      <VideoCall />
+      <Client>
+        <VideoCall />
+      </Client>
     </main>
   );
 }
