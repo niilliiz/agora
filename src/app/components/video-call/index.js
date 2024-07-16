@@ -67,7 +67,7 @@ export default function VideoCall() {
   );
 }
 
-/*
+/* todo
  * preview page
  * permission for camera v mic
  * how we detect if remote user has been joined
