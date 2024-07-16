@@ -34,9 +34,9 @@ export default function VideoCall() {
   console.log("audioTracks", audioTracks);
 
   console.log("data", data);
-  console.log("isLoading", isLoading);
-  console.log("isConnected", isConnected);
-  console.log("error", error);
+  // console.log("isLoading", isLoading);
+  // console.log("isConnected", isConnected);
+  // console.log("error", error);
 
   return (
     <div className={styles.videoCallContainer}>
