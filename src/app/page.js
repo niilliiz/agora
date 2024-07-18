@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <Client>
-        <VideoCall />
+        {/*<VideoCall />*/}
         {/*<Preview />*/}
       </Client>
     </main>

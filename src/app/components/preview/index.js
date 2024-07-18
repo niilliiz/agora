@@ -2,6 +2,9 @@ import MediaControllers from "@/app/components/media-controllers";
 import styles from "./preview.module.css";
 import { useEffect, useRef, useState } from "react";
 import AgoraRTC, { useLocalCameraTrack, useLocalMicrophoneTrack } from "agora-rtc-react";
+import { createMicrophoneAndCameraTracks } from "agora-rtc-sdk-ng/esm";
+
+// const [microphoneTrack, cameraTrack] = AgoraRTC.createMicrophoneAndCameraTracks();
 
 export default function Preview() {
   const [permissionsGranted, setPermissionsGranted] = useState(false);
@@ -11,6 +14,15 @@ export default function Preview() {
 
   const { localMicrophoneTrack } = useLocalMicrophoneTrack();
   const { localCameraTrack } = useLocalCameraTrack();
+
+  // const useClient = createClient(config);
+  const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks().then(res => {
+    console.dir(res);
+    const [microphoneTrack, cameraTrack] = res;
+    cameraTrack.play(videoContainerRef.current);
+  });
+
+  console.log("useMicAndCame", useMicrophoneAndCameraTracks);
 
   // async function handlePermissions() {
   //   try {
@@ -35,6 +47,7 @@ export default function Preview() {
   //     }
   //   };
   // }, []);
+
   return (
     <div className={styles.previewContainer}>
       <div className={styles.videoContainer}>
