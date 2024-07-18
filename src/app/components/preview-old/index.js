@@ -1,12 +1,12 @@
 import MediaControllers from "@/app/components/media-controllers";
-import styles from "./preview.module.css";
+import styles from "./preview-old.module.css";
 import { useEffect, useRef, useState } from "react";
 import AgoraRTC, { useLocalCameraTrack, useLocalMicrophoneTrack } from "agora-rtc-react";
 import { createMicrophoneAndCameraTracks } from "agora-rtc-sdk-ng/esm";
 
 // const [microphoneTrack, cameraTrack] = AgoraRTC.createMicrophoneAndCameraTracks();
 
-export default function Preview() {
+export default function PreviewOLD() {
   const [permissionsGranted, setPermissionsGranted] = useState(false);
   const [localTracks, setLocalTracks] = useState([]);
 

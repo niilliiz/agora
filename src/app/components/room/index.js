@@ -9,7 +9,7 @@ import AgoraRTC, {
   useRTCClient,
 } from "agora-rtc-react";
 import { fakeAvatar, fakeName } from "@/utils/fake";
-import styles from "@/app/components/preview/preview.module.css";
+import styles from "@/app/components/preview-old/preview-old.module.css";
 
 export default function Room({ cameraOn, micOn }) {
   const isConnected = useIsConnected();

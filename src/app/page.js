@@ -1,7 +1,7 @@
 "use client";
 import styles from "./page.module.css";
 import Client from "@/app/components/client";
-import Preview from "@/app/components/preview";
+import Preview from "src/app/components/preview-old";
 import VideoCall from "@/app/components/video-call";
 import Example from "@/app/components/example";
 
