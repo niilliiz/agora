@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import AgoraRTC, {
   useCurrentUID,
   useIsConnected,
@@ -9,9 +9,12 @@ import AgoraRTC, {
   useRTCClient,
 } from "agora-rtc-react";
 import { fakeAvatar, fakeName } from "@/utils/fake";
+import styles from "@/app/components/preview/preview.module.css";
 
 export default function Room({ cameraOn, micOn }) {
   const isConnected = useIsConnected();
+
+  const videoContainerRef = useRef(null);
 
   const uid = useCurrentUID() || 0;
 
@@ -25,18 +28,27 @@ export default function Room({ cameraOn, micOn }) {
 
   const { localMicrophoneTrack } = useLocalMicrophoneTrack(micOn);
   const { localCameraTrack } = useLocalCameraTrack(cameraOn);
+  useMemo(() => {
+    if (localCameraTrack) {
+      if (cameraOn) {
+        localCameraTrack.play(videoContainerRef.current);
+      } else {
+        localCameraTrack.stop();
+        localCameraTrack.off();
+      }
+    }
+  }, [localCameraTrack, cameraOn]);
+
+  console.log("camer", localCameraTrack);
+  // useEffect(() => {
+  //   if (localCameraTrack && cameraOn) {
+  //     localCameraTrack.play(videoContainerRef.current);
+  //   }
+  // }, [cameraOn, localCameraTrack]);
 
   usePublish([localMicrophoneTrack, localCameraTrack]);
 
   const client = useRTCClient();
-
-  console.log("client", client);
-
-  console.log("uid", userName);
-  console.log("isConnected", isConnected);
-  console.log("publishedUsers", publishedUsers);
-  console.log("remoteUsers", remoteUsers);
-  console.log("selfPublished", selfPublished);
 
   const handleUserJoined = async (user, mediaType) => {
     await client.subscribe(user, mediaType);
@@ -66,6 +78,7 @@ export default function Room({ cameraOn, micOn }) {
 
   return (
     <div>
+      <div className={styles.localVideoContainer} ref={videoContainerRef}></div>
       <div>{<p>{`${userName}{${uid}}`}</p>}</div>
     </div>
   );
