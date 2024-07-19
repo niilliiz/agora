@@ -56,6 +56,12 @@ export default function PreviewPage() {
           setMicOn(false);
         });
     }
+
+    // todo: sure about this code snippet, it's just c&p from chatgpt
+    return () => {
+      cameraLocalTrack && cameraLocalTrack.close();
+      microphoneLocalTrack && microphoneLocalTrack.close();
+    };
   }, []);
 
   return (
@@ -78,17 +84,22 @@ export default function PreviewPage() {
         />
       </div>
       <div className={styles.infoContainer}>
-        <div className={styles.info}></div>
+        <div className={styles.info}>
+          {cameraOn && micOn ? "All set to join the call" : "Please enable camera and microphone"}
+        </div>
         <button className={styles.join}></button>
       </div>
     </div>
   );
 }
 
-// 1 - get the name of channel so we would know where we should join
+// 1 - get the name of channel, so we would know where we should join
 // 2- get the token and other stuff
 // 3- know if there is remote user
 // 4- get the corresponding permission if they want to turn on the camera or microphone -> follow the flow of turning on or off the track ---> make a
 //   component for camera and microphone so manage all its state there
 // 5- manage the users
 // 6- users should join to the room with their chosen state
+// 7- just imagine the user didn't give permission to one of the track-> so every time we click on mic or camera button to toggle them, if there is a track so we would know they've already given a permission, if not,
+//    we should ask them to give permission again.
+// 8- use useMemo or useCallback and memo for components performance-wise and avoid re-rendering
