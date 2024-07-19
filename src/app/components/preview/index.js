@@ -21,8 +21,6 @@ export default function PreviewPage() {
 
   const { cameraLocalTrack, microphoneLocalTrack } = localTracks;
 
-  console.log(localTracks);
-
   useEffect(() => {
     if (videoContainerRef.current && isInitialRenderRef.current) {
       // prevent from rendering the video element twice in DOM
@@ -31,10 +29,10 @@ export default function PreviewPage() {
       // get camera permission
       createCameraVideoTrack()
         .then(cameraTrack => {
-          setLocalTracks({
-            microphoneLocalTrack,
+          setLocalTracks(prev => ({
+            ...prev,
             cameraLocalTrack: cameraTrack,
-          });
+          }));
 
           setCameraOn(true);
           cameraTrack.play(videoContainerRef.current);
@@ -48,10 +46,10 @@ export default function PreviewPage() {
       createMicrophoneAudioTrack()
         .then(microphoneTrack => {
           setMicOn(true);
-          setLocalTracks({
+          setLocalTracks(prev => ({
+            ...prev,
             microphoneLocalTrack: microphoneTrack,
-            cameraLocalTrack,
-          });
+          }));
         })
         .catch(e => {
           console.log(e, "User didn't give permission to access MICROPHONE");
