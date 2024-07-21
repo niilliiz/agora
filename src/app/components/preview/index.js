@@ -15,8 +15,8 @@ export default function PreviewPage() {
   const [cameraOn, setCameraOn] = useState(false);
 
   const [localTracks, setLocalTracks] = useState({
-    cameraLocalTrack: {},
-    microphoneLocalTrack: {},
+    cameraLocalTrack: null,
+    microphoneLocalTrack: null,
   });
 
   const { cameraLocalTrack, microphoneLocalTrack } = localTracks;
