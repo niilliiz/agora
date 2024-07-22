@@ -34,3 +34,20 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+### Todos
+    
+    1- send log
+    2- detail modal
+    3- end session error modal
+    4- notice end session modal
+    5- participant ui
+    6- header
+    7- downloadApp
+    8- countDownTimer
+    9- preview page ui
+    10- participant ui
+    11- room ui
+    12- 
+
