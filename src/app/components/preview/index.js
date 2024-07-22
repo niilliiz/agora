@@ -5,6 +5,7 @@ import AgoraRTC, { useJoin, useLocalCameraTrack, useLocalMicrophoneTrack } from 
 import { appConfig } from "@/utils/app-config";
 import { createCameraVideoTrack, createMicrophoneAudioTrack } from "agora-rtc-sdk-ng/esm";
 import useMediaPermissions from "@/utils/useMediaPermissions";
+import PermissionDescription from "@/app/components/permission-description";
 
 export default function PreviewPage() {
   const videoContainerRef = useRef(null);
@@ -119,8 +120,7 @@ export default function PreviewPage() {
       </div>
       <div className={styles.infoContainer}>
         <div className={styles.info}>
-          {cameraPermissionError && `Please enable ${cameraPermissionError} permission`}
-          {micPermissionError && `Please enable ${micPermissionError} permission`}
+          {(cameraPermissionError || micPermissionError) && <PermissionDescription />}
           {cameraOn && micOn ? "All set to join the call" : "Please enable camera and microphone"}
         </div>
         <button className={styles.join}></button>
