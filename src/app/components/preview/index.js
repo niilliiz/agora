@@ -1,10 +1,7 @@
 import MediaControllers from "@/app/components/media-controllers";
 import styles from "./preview.module.css";
 import { useEffect, useMemo, useRef, useState } from "react";
-import AgoraRTC, { useJoin, useLocalCameraTrack, useLocalMicrophoneTrack } from "agora-rtc-react";
-import { appConfig } from "@/utils/app-config";
-import { createCameraVideoTrack, createMicrophoneAudioTrack } from "agora-rtc-sdk-ng/esm";
-import useMediaPermissions from "@/utils/useMediaPermissions";
+import useMediaPermissions from "@/hooks/useMediaPermissions";
 import PermissionDescription from "@/app/components/permission-description";
 
 export default function PreviewPage() {
