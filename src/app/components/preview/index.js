@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import AgoraRTC, { useJoin, useLocalCameraTrack, useLocalMicrophoneTrack } from "agora-rtc-react";
 import { appConfig } from "@/utils/app-config";
 import { createCameraVideoTrack, createMicrophoneAudioTrack } from "agora-rtc-sdk-ng/esm";
+import useMediaPermissions from "@/utils/useMediaPermissions";
 
 export default function PreviewPage() {
   const videoContainerRef = useRef(null);
@@ -11,56 +12,93 @@ export default function PreviewPage() {
   let isInitialRenderRef = useRef(true);
 
   const [calling, setCalling] = useState(false);
-  const [micOn, setMicOn] = useState(false);
-  const [cameraOn, setCameraOn] = useState(false);
+  const {
+    cameraOn,
+    micOn,
+    localTracks,
+    requestCameraPermission,
+    requestMicPermission,
+    clearTracks,
+    checkCameraPermission,
+    checkMicPermission,
+    setCameraOn,
+    setMicOn,
+    permissionError,
+  } = useMediaPermissions();
 
-  const [localTracks, setLocalTracks] = useState({
-    cameraLocalTrack: null,
-    microphoneLocalTrack: null,
-  });
+  const { cameraPermissionError, micPermissionError } = permissionError;
 
-  const { cameraLocalTrack, microphoneLocalTrack } = localTracks;
+  const { cameraLocalTrack } = localTracks;
+
+  async function handleCameraToggle() {
+    if (!cameraOn) {
+      //   we must know if user has given a permission or not
+      const cameraPermissionState = await checkCameraPermission();
+      if (cameraPermissionState !== "granted") {
+        const cameraTrack = await requestCameraPermission();
+        if (cameraTrack) {
+          if (videoContainerRef.current) {
+            cameraTrack.play(videoContainerRef.current);
+          }
+        }
+      } else {
+        const cameraTrack = await requestCameraPermission();
+        if (cameraTrack) {
+          if (videoContainerRef.current) {
+            cameraTrack.play(videoContainerRef.current);
+          }
+        }
+      }
+    } else {
+      //   the user has already given a permission
+      // todo: check the original app to see how they handle turning off the camera
+      setCameraOn(false);
+      if (cameraLocalTrack) {
+        cameraLocalTrack.close();
+      }
+    }
+  }
+
+  // handle pending state
+  async function handleMicToggle() {
+    if (!micOn) {
+      const micPermissionState = await checkMicPermission();
+      if (micPermissionState !== "granted") {
+        await requestMicPermission();
+      } else {
+        const cameraTrack = await requestMicPermission();
+        if (cameraTrack) {
+          if (videoContainerRef.current) {
+            cameraTrack.play(videoContainerRef.current);
+          }
+        }
+      }
+    } else {
+      setMicOn(false);
+      if (localTracks.microphoneLocalTrack) {
+        localTracks.microphoneLocalTrack.close();
+      }
+    }
+  }
 
   useEffect(() => {
     if (videoContainerRef.current && isInitialRenderRef.current) {
-      // prevent from rendering the video element twice in DOM
+      // Prevent from rendering the video element twice in DOM
       isInitialRenderRef.current = false;
 
-      // get camera permission
-      createCameraVideoTrack()
-        .then(cameraTrack => {
-          setLocalTracks(prev => ({
-            ...prev,
-            cameraLocalTrack: cameraTrack,
-          }));
-
-          setCameraOn(true);
+      // Request permissions initially
+      requestCameraPermission().then(cameraTrack => {
+        if (cameraTrack) {
           cameraTrack.play(videoContainerRef.current);
-        })
-        .catch(e => {
-          console.log(e, "User didn't give permission to access CAMERA");
-          setCameraOn(false);
-        });
+        }
+      });
 
-      // get microphone permission
-      createMicrophoneAudioTrack()
-        .then(microphoneTrack => {
-          setMicOn(true);
-          setLocalTracks(prev => ({
-            ...prev,
-            microphoneLocalTrack: microphoneTrack,
-          }));
-        })
-        .catch(e => {
-          console.log(e, "User didn't give permission to access MICROPHONE");
-          setMicOn(false);
-        });
+      requestMicPermission();
     }
 
     // todo: sure about this code snippet, it's just c&p from chatgpt
     return () => {
-      cameraLocalTrack && cameraLocalTrack.close();
-      microphoneLocalTrack && microphoneLocalTrack.close();
+      clearTracks();
     };
   }, []);
 
@@ -75,16 +113,14 @@ export default function PreviewPage() {
           setCalling={() => {
             setCalling(a => !a);
           }}
-          setCameraOn={() => {
-            setCameraOn(a => !a);
-          }}
-          setMicOn={() => {
-            setMicOn(a => !a);
-          }}
+          setCameraOn={() => handleCameraToggle()}
+          setMicOn={() => handleMicToggle()}
         />
       </div>
       <div className={styles.infoContainer}>
         <div className={styles.info}>
+          {cameraPermissionError && `Please enable ${cameraPermissionError} permission`}
+          {micPermissionError && `Please enable ${micPermissionError} permission`}
           {cameraOn && micOn ? "All set to join the call" : "Please enable camera and microphone"}
         </div>
         <button className={styles.join}></button>
