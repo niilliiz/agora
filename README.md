@@ -37,7 +37,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 
 ### Todos
-    
     1- send log
     2- detail modal
     3- end session error modal
@@ -51,3 +50,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
     11- room ui
     12- 
 
+#### References 
+
+* [Connection Status Management](https://docs.agora.io/en/video-calling/enhance-call-quality/connection-status-management?platform=web)

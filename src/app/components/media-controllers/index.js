@@ -9,6 +9,7 @@ export default function MediaControllers({
   setCalling,
   setCameraOn,
   setMicOn,
+  disabled,
 }) {
   return (
     <div className={styles.mediaControllerContainer}>
@@ -22,8 +23,12 @@ export default function MediaControllers({
         </button>
       </div>
       <div className={styles.callContainer}>
-        <button className={styles.controllerButton} onClick={() => setCalling()}>
-          {calling ? "🔴" : "🟢"}
+        <button
+          disabled={disabled}
+          className={styles.controllerButton}
+          onClick={() => setCalling()}
+        >
+          {disabled ? "-" : calling ? "leave" : "join"}
         </button>
       </div>
     </div>

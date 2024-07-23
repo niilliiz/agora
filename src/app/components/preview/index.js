@@ -1,13 +1,23 @@
+// noinspection JSIgnoredPromiseFromCall
+
 import MediaControllers from "@/app/components/media-controllers";
 import styles from "./preview.module.css";
 import { useEffect, useMemo, useRef, useState } from "react";
 import useMediaPermissions from "@/hooks/useMediaPermissions";
 import PermissionDescription from "@/app/components/permission-description";
+import AgoraService from "@/utils/agora-service";
+import { appConfig } from "@/utils/app-config";
+
+const agoraService = new AgoraService();
 
 export default function PreviewPage() {
   const videoContainerRef = useRef(null);
 
+  const [remoteUserJoined, setRemoteUserJoined] = useState(false);
+
   let isInitialRenderRef = useRef(true);
+
+  console.log(agoraService.remoteUser);
 
   const [calling, setCalling] = useState(false);
   const {
@@ -23,6 +33,8 @@ export default function PreviewPage() {
     setMicOn,
     permissionError,
   } = useMediaPermissions();
+
+  const canJoin = micOn || cameraOn;
 
   const { cameraPermissionError, micPermissionError } = permissionError;
 
@@ -79,6 +91,35 @@ export default function PreviewPage() {
     }
   }
 
+  async function handleJoinTheChannel() {
+    try {
+      console.log("join");
+      await agoraService.join(appConfig.appId, appConfig.channel, appConfig.token);
+      setCalling(a => !a);
+    } catch (e) {
+      console.error("Failed to join the channel");
+    }
+  }
+
+  // function handleFetchUser() {
+  //   fetch("http://localhost:5000/api/agora-channel?channelName=First")
+  //     .then(response => {
+  //       if (!response.ok) {
+  //         return response.text().then(text => {
+  //           throw new Error(text);
+  //         });
+  //       }
+  //       return response.json();
+  //     })
+  //     .then(data => {
+  //       console.log(data);
+  //       setRemoteUserJoined(data?.users.length > 0);
+  //     })
+  //     .catch(error => console.error("Error fetching channel users:", error.message));
+  // }
+  //
+  // console.log(remoteUserJoined);
+
   useEffect(() => {
     if (videoContainerRef.current && isInitialRenderRef.current) {
       // Prevent from rendering the video element twice in DOM
@@ -92,6 +133,14 @@ export default function PreviewPage() {
       });
 
       requestMicPermission();
+
+      agoraService.initialize(appConfig.appId);
+
+      // Set the remote user update listener
+      agoraService.setRemoteUserUpdateListener(setRemoteUserJoined);
+
+      //todo: Fetch channel user status from backend
+      // handleFetchUser();
     }
 
     // todo: sure about this code snippet, it's just c&p from chatgpt
@@ -108,9 +157,8 @@ export default function PreviewPage() {
           calling={calling}
           cameraOn={cameraOn}
           micOn={micOn}
-          setCalling={() => {
-            setCalling(a => !a);
-          }}
+          disabled={!canJoin}
+          setCalling={() => handleJoinTheChannel()}
           setCameraOn={() => handleCameraToggle()}
           setMicOn={() => handleMicToggle()}
         />
@@ -118,9 +166,16 @@ export default function PreviewPage() {
       <div className={styles.infoContainer}>
         <div className={styles.info}>
           {(cameraPermissionError || micPermissionError) && <PermissionDescription />}
+          <div className={styles.info}>
+            {remoteUserJoined
+              ? "A remote user has joined the room"
+              : "No remote users in the room yet"}
+          </div>
           {cameraOn && micOn ? "All set to join the call" : "Please enable camera and microphone"}
         </div>
-        <button className={styles.join}></button>
+        {/*<button onClick={handleJoinTheChannel} disabled={!canJoin} className={styles.join}>*/}
+        {/*  join*/}
+        {/*</button>*/}
       </div>
     </div>
   );
