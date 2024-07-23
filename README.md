@@ -53,3 +53,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 #### References 
 
 * [Connection Status Management](https://docs.agora.io/en/video-calling/enhance-call-quality/connection-status-management?platform=web)
+* [Video-SDK Web](https://api-ref.agora.io/en/video-sdk/web/4.x/globals.html)

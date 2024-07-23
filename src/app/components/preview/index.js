@@ -13,11 +13,9 @@ const agoraService = new AgoraService();
 export default function PreviewPage() {
   const videoContainerRef = useRef(null);
 
-  const [remoteUserJoined, setRemoteUserJoined] = useState(false);
+  const [remoteUserJoined, setRemoteUserJoined] = useState(null);
 
   let isInitialRenderRef = useRef(true);
-
-  console.log(agoraService.remoteUser);
 
   const [calling, setCalling] = useState(false);
   const {
@@ -69,7 +67,6 @@ export default function PreviewPage() {
     }
   }
 
-  // handle pending state
   async function handleMicToggle() {
     if (!micOn) {
       const micPermissionState = await checkMicPermission();
@@ -134,7 +131,8 @@ export default function PreviewPage() {
 
       requestMicPermission();
 
-      agoraService.initialize(appConfig.appId);
+      const remotes = agoraService.initialize(appConfig.appId);
+      console.log(remotes, "remotes");
 
       // Set the remote user update listener
       agoraService.setRemoteUserUpdateListener(setRemoteUserJoined);
