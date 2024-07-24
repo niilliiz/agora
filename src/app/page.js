@@ -9,11 +9,11 @@ import PreviewOLD from "@/app/components/preview-old";
 export default function Home() {
   return (
     <main className={styles.main}>
-      {/*<Client>*/}
-      <PreviewPage />
+      <Client>
+        <PreviewPage />
 
-      {/*<VideoCall />*/}
-      {/*</Client>*/}
+        {/*<VideoCall />*/}
+      </Client>
     </main>
   );
 }

@@ -49,7 +49,6 @@ export default function useMediaPermissions() {
         microphoneLocalTrack: microphoneTrack,
       }));
       setMicOn(true);
-      microphoneTrack.play();
       return microphoneTrack;
     } catch (e) {
       console.log(e, "User didn't give permission to access MICROPHONE");
