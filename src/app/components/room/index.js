@@ -33,46 +33,41 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave }
   const { localCameraTrack } = useLocalCameraTrack(cameraOn);
   usePublish([localMicrophoneTrack, localCameraTrack]);
 
-  function handleToggleMic() {
-    if (micOn) {
-      setMicOn(false);
-      if (localMicrophoneTrack) {
-        localMicrophoneTrack.close();
+  useEffect(() => {
+    if (localVideoRef.current) {
+      if (localCameraTrack) {
+        localCameraTrack
+          .setEnabled(cameraOn)
+          .catch(() => console.warn("There is an error while enabling the camera track."));
+
+        if (cameraOn) {
+          localCameraTrack.play(localVideoRef.current);
+        } else {
+          localCameraTrack.stop();
+        }
       }
-    } else {
-      setMicOn(true);
-      if (localMicrophoneTrack) {
+    }
+  }, [cameraOn, localCameraTrack]);
+
+  useEffect(() => {
+    if (localMicrophoneTrack) {
+      localMicrophoneTrack
+        .setEnabled(micOn)
+        .catch(() => console.warn("There is an error while enabling the microphone track."));
+
+      if (micOn) {
         localMicrophoneTrack.play();
+      } else {
+        localMicrophoneTrack.stop();
       }
     }
-  }
-
-  function handleToggleCamera() {
-    if (cameraOn) {
-      setCameraOn(false);
-
-      if (localCameraTrack) {
-        localCameraTrack.stop();
-      }
-    } else {
-      setCameraOn(true);
-      if (localCameraTrack) {
-        localCameraTrack.play(localVideoRef.current);
-      }
-    }
-  }
+  }, [micOn, localMicrophoneTrack]);
 
   useEffect(() => {
     if (remoteCameraTracks.length > 0 && remoteVideoRef.current) {
-      remoteCameraTracks[0].play(remoteVideoRef.current);
+      remoteCameraTracks.map(track => track.play(remoteVideoRef.current));
     }
   }, [remoteCameraTracks.length]);
-
-  useEffect(() => {
-    if (localCameraTrack && localVideoRef.current) {
-      localCameraTrack.play(localVideoRef.current);
-    }
-  }, [localCameraTrack]);
 
   return (
     <div className={styles.roomContainer}>
@@ -85,8 +80,8 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave }
         <MediaController
           micOn={micOn}
           cameraOn={cameraOn}
-          setMicOn={() => handleToggleMic()}
-          setCameraOn={() => handleToggleCamera()}
+          setCameraOn={() => setCameraOn(prevCam => !prevCam)}
+          setMicOn={() => setMicOn(prevMic => !prevMic)}
           onLeave={() => handleLeaveTheRoom()}
         />
       </div>
