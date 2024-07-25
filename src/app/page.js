@@ -2,13 +2,13 @@
 
 import styles from "./page.module.css";
 import Client from "@/app/components/client";
-import Preview from "@/app/components/preview";
+import VideoCall from "@/app/components/video-call";
 
 export default function Home() {
   return (
     <main className={styles.main}>
       <Client>
-        <Preview />
+        <VideoCall />
       </Client>
     </main>
   );
