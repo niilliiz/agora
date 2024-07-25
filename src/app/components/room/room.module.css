@@ -1,17 +1,17 @@
-.previewContainer {
+.roomContainer {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   gap: 20px;
 }
 
-.previewContainer h1 {
+.roomContainer h1 {
   color: #aaa;
   font-weight: 500;
 }
 
-.previewContainer button {
+.roomContainer button {
   color: #aaa;
   font-weight: 500;
   outline: none;
