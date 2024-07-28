@@ -47,6 +47,7 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave }
         }
       }
     }
+    //   todo: handle unmount component
   }, [cameraOn, localCameraTrack]);
 
   useEffect(() => {
@@ -61,12 +62,14 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave }
         localMicrophoneTrack.stop();
       }
     }
+    //   todo: handle unmount component
   }, [micOn, localMicrophoneTrack]);
 
   useEffect(() => {
     if (remoteCameraTracks.length > 0 && remoteVideoRef.current) {
       remoteCameraTracks.map(track => track.play(remoteVideoRef.current));
     }
+    //   todo: handle unmount component
   }, [remoteCameraTracks.length]);
 
   return (

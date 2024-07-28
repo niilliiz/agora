@@ -5,18 +5,3 @@
   justify-content: center;
   gap: 20px;
 }
-.previewContainer h1 {
-  color: #aaa;
-  font-weight: 500;
-}
-
-.previewContainer button {
-  color: #aaa;
-  font-weight: 500;
-  outline: none;
-  border: 2px solid #aaa;
-  padding: 12px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 18px;
-}
