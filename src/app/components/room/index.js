@@ -34,37 +34,7 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave }
   const { localCameraTrack } = useLocalCameraTrack(cameraOn);
   usePublish([localMicrophoneTrack, localCameraTrack]);
 
-  useEffect(() => {
-    if (localVideoRef.current) {
-      if (localCameraTrack) {
-        localCameraTrack
-          .setEnabled(cameraOn)
-          .catch(() => console.warn("There is an error while enabling the camera track."));
-
-        if (cameraOn) {
-          localCameraTrack.play(localVideoRef.current);
-        } else {
-          localCameraTrack.stop();
-        }
-      }
-    }
-    //   todo: handle unmount component
-  }, [cameraOn, localCameraTrack]);
-
-  useEffect(() => {
-    if (localMicrophoneTrack) {
-      localMicrophoneTrack
-        .setEnabled(micOn)
-        .catch(() => console.warn("There is an error while enabling the microphone track."));
-
-      if (micOn) {
-        localMicrophoneTrack.play();
-      } else {
-        localMicrophoneTrack.stop();
-      }
-    }
-    //   todo: handle unmount component
-  }, [micOn, localMicrophoneTrack]);
+  console.log(localCameraTrack, localMicrophoneTrack);
 
   useEffect(() => {
     if (remoteCameraTracks.length > 0 && remoteVideoRef.current) {
@@ -82,10 +52,12 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave }
           <VideoContainer ref={localVideoRef} />
         </div>
         <MediaController
+          ref={localVideoRef}
           micOn={micOn}
           cameraOn={cameraOn}
           setCameraOn={() => setCameraOn(prevCam => !prevCam)}
           setMicOn={() => setMicOn(prevMic => !prevMic)}
+          localTracks={{ localCameraTrack, localMicrophoneTrack }}
           onLeave={() => handleLeaveTheRoom()}
         />
       </div>

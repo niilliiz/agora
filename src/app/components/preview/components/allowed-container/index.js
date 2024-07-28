@@ -1,4 +1,6 @@
-import { forwardRef, useEffect, useMemo, useRef, useState } from "react";
+// noinspection JSIgnoredPromiseFromCall
+
+import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./allowed-container.module.css";
 import VideoContainer from "@/app/components/video-container";
 import MediaController from "@/app/components/media-controller";
@@ -12,10 +14,9 @@ function AllowedContainer({ hasPermission, setHasPermission, onJoin }) {
   const [micOn, setMicOn] = useState(false);
 
   const [localTracks, setLocalTracks] = useState({
-    cameraLocalTrack: null,
-    microphoneLocalTrack: null,
+    LocalCameraTrack: null,
+    LocalMicrophoneTrack: null,
   });
-
   // const hasPermission = Object.values(localTracks).every(track => track !== null);
 
   useMemo(() => {
@@ -28,8 +29,8 @@ function AllowedContainer({ hasPermission, setHasPermission, onJoin }) {
       const [microphoneTrack, cameraTrack] = await createMicrophoneAndCameraTracks();
       setLocalTracks(prevLocal => ({
         ...prevLocal,
-        cameraLocalTrack: cameraTrack,
-        microphoneLocalTrack: microphoneTrack,
+        LocalCameraTrack: cameraTrack,
+        LocalMicrophoneTrack: microphoneTrack,
       }));
       setCameraOn(true);
       setMicOn(true);
@@ -41,7 +42,7 @@ function AllowedContainer({ hasPermission, setHasPermission, onJoin }) {
         microphoneTrack.play();
       }
     } catch (e) {
-      console.log(e, "User didn't give permission to either MICROPHONE or CAMERA");
+      console.log(e, "User didn't give permission to both MICROPHONE or CAMERA");
     }
   }
 
@@ -53,11 +54,19 @@ function AllowedContainer({ hasPermission, setHasPermission, onJoin }) {
       requestCameraAndMicrophonePermission();
     }
   }, []);
+
   return (
     <div className={styles.allowedContainer}>
       <div className={styles.mediaContainer}>
         <VideoContainer ref={videoContainerRef} />
-        <MediaController />
+        <MediaController
+          ref={videoContainerRef}
+          micOn={micOn}
+          cameraOn={cameraOn}
+          setCameraOn={() => setCameraOn(prevCam => !prevCam)}
+          setMicOn={() => setMicOn(prevMic => !prevMic)}
+          localTracks={localTracks}
+        />
       </div>
       <div className={styles.infoContainer}>
         <button disabled={!hasPermission} onClick={() => onJoin()}>

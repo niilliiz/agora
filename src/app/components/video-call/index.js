@@ -4,6 +4,7 @@ import { useJoin } from "agora-rtc-react";
 import { appConfig } from "@/utils/app-config";
 import Room from "@/app/components/room";
 import Preview from "@/app/components/preview";
+import useMediaControl from "@/hooks/useMediaControl";
 
 export default function VideoCall() {
   const [isCalling, setIsCalling] = useState(false);

@@ -1,8 +1,5 @@
-// noinspection JSIgnoredPromiseFromCall
-
 import styles from "./preview.module.css";
-import { useEffect, useRef, useState } from "react";
-import { createCameraVideoTrack, createMicrophoneAndCameraTracks } from "agora-rtc-sdk-ng/esm";
+import { useState } from "react";
 import NotAllowedContainer from "@/app/components/preview/components/not-allowed-container";
 import AllowedContainer from "@/app/components/preview/components/allowed-container";
 
