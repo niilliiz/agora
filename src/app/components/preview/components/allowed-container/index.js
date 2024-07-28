@@ -14,8 +14,8 @@ function AllowedContainer({ hasPermission, setHasPermission, onJoin }) {
   const [micOn, setMicOn] = useState(false);
 
   const [localTracks, setLocalTracks] = useState({
-    LocalCameraTrack: null,
-    LocalMicrophoneTrack: null,
+    localCameraTrack: null,
+    localMicrophoneTrack: null,
   });
   // const hasPermission = Object.values(localTracks).every(track => track !== null);
 
@@ -29,8 +29,8 @@ function AllowedContainer({ hasPermission, setHasPermission, onJoin }) {
       const [microphoneTrack, cameraTrack] = await createMicrophoneAndCameraTracks();
       setLocalTracks(prevLocal => ({
         ...prevLocal,
-        LocalCameraTrack: cameraTrack,
-        LocalMicrophoneTrack: microphoneTrack,
+        localCameraTrack: cameraTrack,
+        localMicrophoneTrack: microphoneTrack,
       }));
       setCameraOn(true);
       setMicOn(true);
