@@ -1,0 +1,4 @@
+.videoContainer {
+  width: var(--video_width);
+  height: var(--video_height);
+}

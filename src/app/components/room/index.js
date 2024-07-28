@@ -11,6 +11,7 @@ import {
 } from "agora-rtc-react";
 import MediaController from "@/app/components/media-controller";
 import { useEffect, useRef } from "react";
+import VideoContainer from "@/app/components/video-container";
 
 export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave }) {
   const remoteVideoRef = useRef(null);
@@ -77,8 +78,8 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave }
       <h1>Room</h1>
       <div className={styles.videoContainer}>
         <div className={styles.videoWrapper}>
-          <div className={styles.video} ref={remoteVideoRef} />
-          <div className={styles.video} ref={localVideoRef} />
+          <VideoContainer ref={remoteVideoRef} />
+          <VideoContainer ref={localVideoRef} />
         </div>
         <MediaController
           micOn={micOn}
