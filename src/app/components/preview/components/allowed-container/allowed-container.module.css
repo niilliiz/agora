@@ -21,3 +21,8 @@
   cursor: pointer;
   font-size: 18px;
 }
+
+.videoContainer {
+  width: 400px;
+  height: 400px;
+}
