@@ -19,6 +19,7 @@ export default function VideoCall() {
     setIsCalling(false);
   }
 
+  // todo: u can handle the error here - if there is error - if it's not connected
   // this is the way to join the room
   const { data, isLoading, isConnected, error } = useJoin(
     {
@@ -28,8 +29,6 @@ export default function VideoCall() {
     },
     isCalling,
   );
-
-  // todo: u can handle the error here - if there is error - if it's not connected
 
   return (
     <div className={styles.videoCallContainer}>
