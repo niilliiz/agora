@@ -11,6 +11,11 @@ export default function VideoCall() {
   const [micOn, setMicOn] = useState(false);
   const [cameraOn, setCameraOn] = useState(false);
 
+  const [localTracks, setLocalTracks] = useState({
+    localCameraTrack: null,
+    localMicrophoneTrack: null,
+  });
+
   function handleJoinButtonClicked() {
     setIsCalling(true);
   }
@@ -42,6 +47,8 @@ export default function VideoCall() {
     <div className={styles.videoCallContainer}>
       {!isCalling ? (
         <Preview
+          localTracks={localTracks}
+          setLocalTracks={setLocalTracks}
           micOn={micOn}
           cameraOn={cameraOn}
           setMicOn={() => handleSetMicOn()}
@@ -50,6 +57,7 @@ export default function VideoCall() {
         />
       ) : (
         <Room
+          localTracks={localTracks}
           micOn={micOn}
           cameraOn={cameraOn}
           setMicOn={() => handleSetMicOn()}

@@ -8,16 +8,19 @@ import {
   useRemoteAudioTracks,
   useRemoteUsers,
   useRemoteVideoTracks,
+  useRTCClient,
 } from "agora-rtc-react";
 import MediaController from "@/app/components/media-controller";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import VideoContainer from "@/app/components/video-container";
 
-export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave }) {
+export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave, localTracks }) {
   const remoteVideoRef = useRef(null);
   const localVideoRef = useRef(null);
 
   const isConnected = useIsConnected();
+
+  const { localCameraTrack, localMicrophoneTrack } = localTracks;
 
   function handleLeaveTheRoom() {
     onLeave();
@@ -30,9 +33,14 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave }
   const { audioTracks: remoteMicrophoneTracks } = useRemoteAudioTracks(remoteUsers);
   remoteMicrophoneTracks.map(track => track.play());
 
-  const { localMicrophoneTrack } = useLocalMicrophoneTrack(micOn);
-  const { localCameraTrack } = useLocalCameraTrack(cameraOn);
-  usePublish([localMicrophoneTrack, localCameraTrack]);
+  // const { localMicrophoneTrack } = useLocalMicrophoneTrack(micOn);
+  // const { localCameraTrack } = useLocalCameraTrack(cameraOn);
+  const client = useRTCClient();
+  useMemo(() => {
+    if (client) {
+      client.publish([localMicrophoneTrack, localCameraTrack]);
+    }
+  }, [micOn, cameraOn, client, localMicrophoneTrack, localCameraTrack]);
 
   useEffect(() => {
     if (remoteCameraTracks.length > 0 && remoteVideoRef.current) {
@@ -55,7 +63,7 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave }
           cameraOn={cameraOn}
           setCameraOn={setCameraOn}
           setMicOn={setMicOn}
-          localTracks={{ localCameraTrack, localMicrophoneTrack }}
+          localTracks={localTracks}
           onLeave={() => handleLeaveTheRoom()}
         />
       </div>

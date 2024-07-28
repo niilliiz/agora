@@ -3,7 +3,15 @@ import { useState } from "react";
 import NotAllowedContainer from "@/app/components/preview/components/not-allowed-container";
 import AllowedContainer from "@/app/components/preview/components/allowed-container";
 
-export default function Preview({ onJoin, micOn, setMicOn, cameraOn, setCameraOn }) {
+export default function Preview({
+  onJoin,
+  micOn,
+  setMicOn,
+  cameraOn,
+  setCameraOn,
+  localTracks,
+  setLocalTracks,
+}) {
   const [hasPermission, setHasPermission] = useState(false);
 
   return (
@@ -16,6 +24,8 @@ export default function Preview({ onJoin, micOn, setMicOn, cameraOn, setCameraOn
         onJoin={onJoin}
         hasPermission={hasPermission}
         setHasPermission={value => setHasPermission(value)}
+        localTracks={localTracks}
+        setLocalTracks={setLocalTracks}
       />
       {!hasPermission && <NotAllowedContainer />}
     </div>

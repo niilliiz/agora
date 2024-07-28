@@ -14,14 +14,13 @@ function AllowedContainer({
   setMicOn,
   cameraOn,
   setCameraOn,
+  localTracks,
+  setLocalTracks,
 }) {
   let isInitialRenderRef = useRef(true);
   const videoContainerRef = useRef(null);
 
-  const [localTracks, setLocalTracks] = useState({
-    localCameraTrack: null,
-    localMicrophoneTrack: null,
-  });
+  // const { localCameraTrack, localMicrophoneTrack } = localTracks;
 
   async function requestCameraAndMicrophonePermission() {
     // todo: we force user to give permission for both medias, if we want to force them just to give for the one of them, we can use createCameraVideoTrack or createMicrophoneAudioTrack separately
@@ -44,6 +43,8 @@ function AllowedContainer({
       setHasPermission(true);
     } catch (e) {
       setHasPermission(false);
+      setCameraOn(false);
+      setMicOn(false);
       console.log(e, "User didn't give permission to both MICROPHONE or CAMERA");
     }
   }
