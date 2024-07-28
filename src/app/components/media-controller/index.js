@@ -18,7 +18,6 @@ function MediaController(
 ) {
   const { localCameraTrack, localMicrophoneTrack } = localTracks;
 
-  // console.log(localMicrophoneTrack, localCameraTrack);
   useEffect(() => {
     if (ref.current) {
       if (localCameraTrack) {
@@ -49,7 +48,9 @@ function MediaController(
       }
     }
     //   todo: handle unmount component
+    return () => console.log("unmount camera");
   }, [micOn, localMicrophoneTrack]);
+
   return (
     <div className={`${styles.mediaControllerContainer} ${className}`}>
       {onOpenNotepad && <button onClick={() => onOpenNotepad()}>notepad</button>}
