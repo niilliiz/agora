@@ -65,8 +65,8 @@ function AllowedContainer({
           ref={videoContainerRef}
           micOn={micOn}
           cameraOn={cameraOn}
-          setCameraOn={() => setCameraOn(prevCam => !prevCam)}
-          setMicOn={() => setMicOn(prevMic => !prevMic)}
+          setCameraOn={setCameraOn}
+          setMicOn={setMicOn}
           localTracks={localTracks}
         />
       </div>

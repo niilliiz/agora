@@ -28,6 +28,7 @@ function MediaController(
         if (cameraOn) {
           localCameraTrack.play(ref.current);
         } else {
+          console.log("STOPPPPPP");
           localCameraTrack.stop();
         }
       }
@@ -55,8 +56,8 @@ function MediaController(
     <div className={`${styles.mediaControllerContainer} ${className}`}>
       {onOpenNotepad && <button onClick={() => onOpenNotepad()}>notepad</button>}
       {onOpenMoreInfo && <button onClick={() => onOpenMoreInfo()}>option</button>}
-      <button onClick={() => setMicOn(prev => !prev)}>{micOn ? "mute" : "unmute"}</button>
-      <button onClick={() => setCameraOn(prev => !prev)}>{cameraOn ? "cam on" : "cam off"}</button>
+      <button onClick={setMicOn}>{micOn ? "mute" : "unmute"}</button>
+      <button onClick={setCameraOn}>{cameraOn ? "cam on" : "cam off"}</button>
       {onVolumeChange && <button onClick={() => onVolumeChange()}>volume</button>}
       {onLeave && <button onClick={() => onLeave()}>LEAVE</button>}
     </div>

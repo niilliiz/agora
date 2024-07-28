@@ -53,8 +53,8 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave }
           ref={localVideoRef}
           micOn={micOn}
           cameraOn={cameraOn}
-          setCameraOn={() => setCameraOn(prevCam => !prevCam)}
-          setMicOn={() => setMicOn(prevMic => !prevMic)}
+          setCameraOn={setCameraOn}
+          setMicOn={setMicOn}
           localTracks={{ localCameraTrack, localMicrophoneTrack }}
           onLeave={() => handleLeaveTheRoom()}
         />

@@ -11,8 +11,8 @@ export default function Preview({ onJoin, micOn, setMicOn, cameraOn, setCameraOn
       <AllowedContainer
         micOn={micOn}
         cameraOn={cameraOn}
-        setMicOn={() => setMicOn()}
-        setCameraOn={() => setCameraOn()}
+        setMicOn={setMicOn}
+        setCameraOn={setCameraOn}
         onJoin={onJoin}
         hasPermission={hasPermission}
         setHasPermission={value => setHasPermission(value)}

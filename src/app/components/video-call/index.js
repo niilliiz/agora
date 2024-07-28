@@ -30,6 +30,13 @@ export default function VideoCall() {
     isCalling,
   );
 
+  function handleSetCamOn() {
+    setCameraOn(prevCamera => !prevCamera);
+  }
+  function handleSetMicOn() {
+    setMicOn(prevCamera => !prevCamera);
+  }
+
   // todo: maybe it would be a good idea if we put mic and cam in context and use it in the room and preview
   return (
     <div className={styles.videoCallContainer}>
@@ -37,16 +44,16 @@ export default function VideoCall() {
         <Preview
           micOn={micOn}
           cameraOn={cameraOn}
-          setMicOn={() => setMicOn(prevMic => !prevMic)}
-          setCameraOn={() => setCameraOn(prevCamera => !prevCamera)}
+          setMicOn={() => handleSetMicOn()}
+          setCameraOn={() => handleSetCamOn()}
           onJoin={() => handleJoinButtonClicked()}
         />
       ) : (
         <Room
           micOn={micOn}
           cameraOn={cameraOn}
-          setMicOn={() => setMicOn(prevMic => !prevMic)}
-          setCameraOn={() => setCameraOn(prevCamera => !prevCamera)}
+          setMicOn={() => handleSetMicOn()}
+          setCameraOn={() => handleSetCamOn()}
           onLeave={() => handleLeaveButtonClicked()}
         />
       )}
