@@ -14,13 +14,16 @@ function AllowedContainer({
   setMicOn,
   cameraOn,
   setCameraOn,
-  localTracks,
-  setLocalTracks,
 }) {
   let isInitialRenderRef = useRef(true);
   const videoContainerRef = useRef(null);
 
-  // const { localCameraTrack, localMicrophoneTrack } = localTracks;
+  const [localTracks, setLocalTracks] = useState({
+    localCameraTrack: null,
+    localMicrophoneTrack: null,
+  });
+
+  const { localCameraTrack, localMicrophoneTrack } = localTracks;
 
   async function requestCameraAndMicrophonePermission() {
     // todo: we force user to give permission for both medias, if we want to force them just to give for the one of them, we can use createCameraVideoTrack or createMicrophoneAudioTrack separately
@@ -43,8 +46,6 @@ function AllowedContainer({
       setHasPermission(true);
     } catch (e) {
       setHasPermission(false);
-      setCameraOn(false);
-      setMicOn(false);
       console.log(e, "User didn't give permission to both MICROPHONE or CAMERA");
     }
   }
@@ -57,6 +58,38 @@ function AllowedContainer({
       requestCameraAndMicrophonePermission();
     }
   }, []);
+
+  useEffect(() => {
+    if (videoContainerRef.current) {
+      if (localCameraTrack) {
+        localCameraTrack
+          .setEnabled(cameraOn)
+          .catch(() => console.warn("There is an error while enabling the camera track."));
+
+        if (cameraOn) {
+          localCameraTrack.play(videoContainerRef.current);
+        } else {
+          localCameraTrack.stop();
+        }
+      }
+    }
+    //   todo: handle unmount component
+  }, [cameraOn, localCameraTrack]);
+
+  useEffect(() => {
+    if (localMicrophoneTrack) {
+      localMicrophoneTrack
+        .setEnabled(micOn)
+        .catch(() => console.warn("There is an error while enabling the microphone track."));
+
+      if (micOn) {
+        localMicrophoneTrack.play();
+      } else {
+        localMicrophoneTrack.stop();
+      }
+    }
+    //   todo: handle unmount component
+  }, [micOn, localMicrophoneTrack]);
 
   return (
     <div className={styles.allowedContainer}>
