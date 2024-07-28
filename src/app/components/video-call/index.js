@@ -31,6 +31,7 @@ export default function VideoCall() {
     isCalling,
   );
 
+  // todo: maybe it would be a good idea if we put mic and cam in context and use it in the room and preview
   return (
     <div className={styles.videoCallContainer}>
       {!isCalling ? (
