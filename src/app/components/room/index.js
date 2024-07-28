@@ -34,8 +34,6 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave }
   const { localCameraTrack } = useLocalCameraTrack(cameraOn);
   usePublish([localMicrophoneTrack, localCameraTrack]);
 
-  console.log(localCameraTrack, localMicrophoneTrack);
-
   useEffect(() => {
     if (remoteCameraTracks.length > 0 && remoteVideoRef.current) {
       remoteCameraTracks.map(track => track.play(remoteVideoRef.current));
