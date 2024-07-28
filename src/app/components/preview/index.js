@@ -3,12 +3,16 @@ import { useState } from "react";
 import NotAllowedContainer from "@/app/components/preview/components/not-allowed-container";
 import AllowedContainer from "@/app/components/preview/components/allowed-container";
 
-export default function Preview({ onJoin }) {
+export default function Preview({ onJoin, micOn, setMicOn, cameraOn, setCameraOn }) {
   const [hasPermission, setHasPermission] = useState(false);
 
   return (
     <div className={styles.previewContainer}>
       <AllowedContainer
+        micOn={micOn}
+        cameraOn={cameraOn}
+        setMicOn={() => setMicOn()}
+        setCameraOn={() => setCameraOn()}
         onJoin={onJoin}
         hasPermission={hasPermission}
         setHasPermission={value => setHasPermission(value)}

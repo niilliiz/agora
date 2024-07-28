@@ -6,12 +6,17 @@ import VideoContainer from "@/app/components/video-container";
 import MediaController from "@/app/components/media-controller";
 import { createMicrophoneAndCameraTracks } from "agora-rtc-sdk-ng/esm";
 
-function AllowedContainer({ hasPermission, setHasPermission, onJoin }) {
+function AllowedContainer({
+  hasPermission,
+  setHasPermission,
+  onJoin,
+  micOn,
+  setMicOn,
+  cameraOn,
+  setCameraOn,
+}) {
   let isInitialRenderRef = useRef(true);
   const videoContainerRef = useRef(null);
-
-  const [cameraOn, setCameraOn] = useState(false);
-  const [micOn, setMicOn] = useState(false);
 
   const [localTracks, setLocalTracks] = useState({
     localCameraTrack: null,

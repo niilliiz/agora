@@ -34,7 +34,13 @@ export default function VideoCall() {
   return (
     <div className={styles.videoCallContainer}>
       {!isCalling ? (
-        <Preview onJoin={() => handleJoinButtonClicked()} />
+        <Preview
+          micOn={micOn}
+          cameraOn={cameraOn}
+          setMicOn={() => setMicOn(prevMic => !prevMic)}
+          setCameraOn={() => setCameraOn(prevCamera => !prevCamera)}
+          onJoin={() => handleJoinButtonClicked()}
+        />
       ) : (
         <Room
           micOn={micOn}
