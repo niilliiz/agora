@@ -1,6 +1,6 @@
 import styles from "./video-call.module.css";
 import { useState } from "react";
-import { useIsConnected, useJoin } from "agora-rtc-react";
+import { useJoin } from "agora-rtc-react";
 import { appConfig } from "@/utils/app-config";
 import Room from "@/app/components/room";
 import Preview from "@/app/components/preview";
@@ -28,7 +28,8 @@ export default function VideoCall() {
     },
     isCalling,
   );
-  console.log("isConnected Preview", isConnected);
+
+  // todo: u can handle the error here - if there is error - if it's not connected
 
   return (
     <div className={styles.videoCallContainer}>
