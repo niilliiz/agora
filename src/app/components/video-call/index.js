@@ -34,7 +34,7 @@ export default function VideoCall() {
     setCameraOn(prevCamera => !prevCamera);
   }
   function handleSetMicOn() {
-    setMicOn(prevCamera => !prevCamera);
+    setMicOn(prevMic => !prevMic);
   }
 
   // todo: maybe it would be a good idea if we put mic and cam in context and use it in the room and preview
