@@ -48,7 +48,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
     9- preview page ui
     10- participant ui
     11- room ui
-    12- 
+    12- performance issues => useCallback and useMemo for functions...
 
 #### References 
 
