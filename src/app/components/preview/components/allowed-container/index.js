@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./allowed-container.module.css";
 import VideoContainer from "@/app/components/video-container";
 import MediaController from "@/app/components/media-controller";
-import { createMicrophoneAndCameraTracks } from "agora-rtc-sdk-ng/esm";
+import AgoraRTC from "agora-rtc-react";
 
 function AllowedContainer({
   hasPermission,
@@ -14,21 +14,18 @@ function AllowedContainer({
   setMicOn,
   cameraOn,
   setCameraOn,
+  localTracks,
+  setLocalTracks,
 }) {
   let isInitialRenderRef = useRef(true);
   const videoContainerRef = useRef(null);
-
-  const [localTracks, setLocalTracks] = useState({
-    localCameraTrack: null,
-    localMicrophoneTrack: null,
-  });
 
   const { localCameraTrack, localMicrophoneTrack } = localTracks;
 
   async function requestCameraAndMicrophonePermission() {
     // todo: we force user to give permission for both medias, if we want to force them just to give for the one of them, we can use createCameraVideoTrack or createMicrophoneAudioTrack separately
     try {
-      const [microphoneTrack, cameraTrack] = await createMicrophoneAndCameraTracks();
+      const [microphoneTrack, cameraTrack] = await AgoraRTC.createMicrophoneAndCameraTracks();
       setLocalTracks(prevLocal => ({
         ...prevLocal,
         localCameraTrack: cameraTrack,

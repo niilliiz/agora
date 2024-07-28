@@ -37,6 +37,11 @@ export default function VideoCall() {
     setMicOn(prevMic => !prevMic);
   }
 
+  const [localTracks, setLocalTracks] = useState({
+    localCameraTrack: null,
+    localMicrophoneTrack: null,
+  });
+
   // todo: maybe it would be a good idea if we put mic and cam in context and use it in the room and preview
   return (
     <div className={styles.videoCallContainer}>
@@ -47,6 +52,8 @@ export default function VideoCall() {
           setMicOn={() => handleSetMicOn()}
           setCameraOn={() => handleSetCamOn()}
           onJoin={() => handleJoinButtonClicked()}
+          localTracks={localTracks}
+          setLocalTracks={setLocalTracks}
         />
       ) : (
         <Room
@@ -55,11 +62,24 @@ export default function VideoCall() {
           setMicOn={() => handleSetMicOn()}
           setCameraOn={() => handleSetCamOn()}
           onLeave={() => handleLeaveButtonClicked()}
+          localTracks={localTracks}
+          setLocalTracks={setLocalTracks}
         />
       )}
     </div>
   );
 }
+
+//  <button onClick={handleJoinButtonClicked}>join</button>
+//       {isCalling && (
+//         <Room
+//           micOn={micOn}
+//           cameraOn={cameraOn}
+//           setMicOn={() => handleSetMicOn()}
+//           setCameraOn={() => handleSetCamOn()}
+//           onLeave={() => handleLeaveButtonClicked()}
+//         />
+//       )}
 
 /*
  * todo
