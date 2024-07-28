@@ -1,15 +1,20 @@
 import { forwardRef } from "react";
 import styles from "./allowed-container.module.css";
 import VideoContainer from "@/app/components/video-container";
+import MediaController from "@/app/components/media-controller";
 
 function AllowedContainer({ hasPermission, onJoin }, ref) {
   return (
     <div className={styles.allowedContainer}>
-      <h1>Preview</h1>
-      <VideoContainer ref={ref} />
-      <button disabled={!hasPermission} onClick={() => onJoin()}>
-        JOIN
-      </button>
+      <div className={styles.mediaContainer}>
+        <VideoContainer ref={ref} />
+        <MediaController />
+      </div>
+      <div className={styles.infoContainer}>
+        <button disabled={!hasPermission} onClick={() => onJoin()}>
+          JOIN
+        </button>
+      </div>
     </div>
   );
 }
