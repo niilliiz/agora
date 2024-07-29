@@ -71,7 +71,8 @@ export default function VideoCall() {
           localTracks={localTracks}
           setLocalTracks={setLocalTracks}
         />
-      ) : null}
+      ) : //   todo: handle when isLoading is true and error happens
+      null}
     </div>
   );
 }
