@@ -1,0 +1,40 @@
+.header {
+  background-color: #000;
+  color: #b7bfc7;
+  padding: 7px 0;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 20px;
+  color: #b7bfc7;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.subtitle {
+  font-weight: 400;
+  font-size: 16px;
+  display: inline-block;
+  margin-inline-start: 16px;
+}
+
+.headerCTA {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+  font-size: 16px;
+}
