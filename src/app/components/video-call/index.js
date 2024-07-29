@@ -55,7 +55,7 @@ export default function VideoCall() {
           localTracks={localTracks}
           setLocalTracks={setLocalTracks}
         />
-      ) : (
+      ) : !isLoading && isConnected ? (
         <Room
           micOn={micOn}
           cameraOn={cameraOn}
@@ -65,7 +65,7 @@ export default function VideoCall() {
           localTracks={localTracks}
           setLocalTracks={setLocalTracks}
         />
-      )}
+      ) : null}
     </div>
   );
 }

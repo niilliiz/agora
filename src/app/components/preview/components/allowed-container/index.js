@@ -1,6 +1,6 @@
 // noinspection JSIgnoredPromiseFromCall
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import styles from "./allowed-container.module.css";
 import VideoContainer from "@/app/components/video-container";
 import MediaController from "@/app/components/media-controller";
@@ -93,7 +93,6 @@ function AllowedContainer({
       <div className={styles.mediaContainer}>
         <VideoContainer ref={videoContainerRef} />
         <MediaController
-          ref={videoContainerRef}
           micOn={micOn}
           cameraOn={cameraOn}
           setCameraOn={setCameraOn}
