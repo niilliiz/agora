@@ -46,6 +46,8 @@ export default function VideoCall() {
   useMemo(() => {
     if (!isCalling) {
       setLocalTracks({ localCameraTrack: null, localMicrophoneTrack: null });
+      setMicOn(false);
+      setCameraOn(false);
     }
   }, [isCalling]);
 
