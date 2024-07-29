@@ -6,6 +6,7 @@
 
   width: 100%;
   min-height: 450px;
+  color: #fff;
 }
 
 /*----------------------MEDIA CONTAINER--------------*/
@@ -14,7 +15,6 @@
   display: flex;
   flex-direction: column;
   flex-basis: 55%;
-  border: 1px solid blue;
 }
 
 .videoWrapper {
@@ -37,15 +37,43 @@
 
 .infoContainer {
   align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.infoContainer > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
 .header {
+  margin-bottom: 24px;
 }
 .doctorName {
+  font-weight: 500;
+  font-size: 16px;
 }
-.specialtyName {
+.smallTitle {
+  font-weight: 400;
+  font-size: 12px;
 }
+
+.title {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .sessionDetail {
+  margin-bottom: 48px;
 }
 .date {
 }
@@ -58,6 +86,12 @@
 .footer {
 }
 .joinCTA {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 24px;
+  background-color: #232929;
+  border-radius: 100px;
 }
 .sessionState {
 }

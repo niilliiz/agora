@@ -8,11 +8,8 @@
 
 .controller {
   padding: 11px;
-  -webkit-border-radius: 100%;
-  -moz-border-radius: 100%;
   border-radius: 100%;
   border: 1px solid #fff;
-  outline: none;
   display: flex;
   flex-direction: column;
   align-items: center;

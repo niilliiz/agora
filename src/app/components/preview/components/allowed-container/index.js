@@ -107,10 +107,10 @@ function AllowedContainer({
       <section className={styles.infoContainer}>
         <div className={styles.header}>
           <h2 className={styles.doctorName}>With James Rodrigo</h2>
-          <div className={styles.specialtyName}>Cancer</div>
+          <div className={styles.smallTitle}>Cancer</div>
         </div>
         <div className={styles.sessionDetail}>
-          <p className={styles.date}>
+          <p className={styles.row}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -123,9 +123,9 @@ function AllowedContainer({
                 fill="white"
               />
             </svg>
-            <span className={styles.time}>Thursday, Jun 15</span>
+            <span className={styles.title}>Thursday, Jun 15</span>
           </p>
-          <p className={styles.sessionDuration}>
+          <p className={styles.row}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="17"
@@ -139,14 +139,14 @@ function AllowedContainer({
               />
               <path d="M8.5 3.33325V7.99992L11.1667 10.6666" stroke="white" strokeLinecap="round" />
             </svg>
-            <span className={styles.duration}>12:30-13:00 (30 minutes duration)</span>
+            <span className={styles.title}>12:30-13:00 (30 minutes duration)</span>
           </p>
         </div>
         <div className={styles.footer}>
           <button className={styles.joinCTA} disabled={!hasPermission} onClick={() => onJoin()}>
             Join Now
           </button>
-          <span className={styles.sessionDetail}>You’re the first one here</span>
+          <span className={styles.smallTitle}>You’re the first one here</span>
         </div>
       </section>
     </div>
