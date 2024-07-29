@@ -9,6 +9,7 @@ export default function Header() {
           Doki is now <strong className={styles.bold}>✨Nexu✨</strong>
           <span className={styles.subtitle}>New name, Same trusted experience!</span>
         </h6>
+        {/*todo*/}
         <a href="#" className={styles.headerCTA}>
           <span>Get to know Nexu</span>
           <svg

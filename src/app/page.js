@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./page.module.css";
+import styles from "@/app/page.module.css";
 import Client from "@/app/components/client";
 import VideoCall from "@/app/components/video-call";
 
