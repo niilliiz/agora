@@ -4,6 +4,7 @@ import { useJoin } from "agora-rtc-react";
 import { appConfig } from "@/utils/app-config";
 import Room from "@/app/components/room";
 import Preview from "@/app/components/preview";
+import Container from "@/app/components/layout-components/container";
 
 export default function VideoCall() {
   const [isCalling, setIsCalling] = useState(false);
@@ -53,6 +54,9 @@ export default function VideoCall() {
 
   return (
     <div className={styles.videoCallContainer}>
+      <Container>
+        <div>header which contains nexu logo and support or timer</div>
+      </Container>
       {!isCalling ? (
         <Preview
           micOn={micOn}

@@ -2,6 +2,7 @@ import styles from "./preview.module.css";
 import { useState } from "react";
 import NotAllowedContainer from "@/app/components/preview/components/not-allowed-container";
 import AllowedContainer from "@/app/components/preview/components/allowed-container";
+import Container from "@/app/components/layout-components/container";
 
 export default function Preview({
   onJoin,
@@ -14,21 +15,24 @@ export default function Preview({
 }) {
   const [hasPermission, setHasPermission] = useState(false);
 
+  console.log(hasPermission);
   return (
-    <div className={styles.previewContainer}>
-      <AllowedContainer
-        micOn={micOn}
-        cameraOn={cameraOn}
-        setMicOn={setMicOn}
-        setCameraOn={setCameraOn}
-        onJoin={onJoin}
-        hasPermission={hasPermission}
-        setHasPermission={value => setHasPermission(value)}
-        localTracks={localTracks}
-        setLocalTracks={setLocalTracks}
-      />
-      {!hasPermission && <NotAllowedContainer />}
-    </div>
+    <Container>
+      <div className={styles.previewContainer}>
+        <AllowedContainer
+          micOn={micOn}
+          cameraOn={cameraOn}
+          setMicOn={setMicOn}
+          setCameraOn={setCameraOn}
+          onJoin={onJoin}
+          hasPermission={hasPermission}
+          setHasPermission={value => setHasPermission(value)}
+          localTracks={localTracks}
+          setLocalTracks={setLocalTracks}
+        />
+        {!hasPermission && <NotAllowedContainer />}
+      </div>
+    </Container>
   );
 }
 

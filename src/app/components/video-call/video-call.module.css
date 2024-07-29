@@ -4,7 +4,5 @@
   justify-content: center;
   gap: 20px;
   flex-grow: 1;
-  border: 2px solid #aaa;
-  border-radius: 8px;
   overflow: hidden;
 }
