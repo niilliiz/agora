@@ -1,5 +1,5 @@
 import styles from "./video-call.module.css";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useJoin } from "agora-rtc-react";
 import { appConfig } from "@/utils/app-config";
 import Room from "@/app/components/room";
@@ -8,6 +8,7 @@ import Preview from "@/app/components/preview";
 export default function VideoCall() {
   const [isCalling, setIsCalling] = useState(false);
 
+  // todo: maybe it would be a good idea if we put mic and cam in context and use it in the room and preview
   const [micOn, setMicOn] = useState(false);
   const [cameraOn, setCameraOn] = useState(false);
 
@@ -42,7 +43,12 @@ export default function VideoCall() {
     localMicrophoneTrack: null,
   });
 
-  // todo: maybe it would be a good idea if we put mic and cam in context and use it in the room and preview
+  useMemo(() => {
+    if (!isCalling) {
+      setLocalTracks({ localCameraTrack: null, localMicrophoneTrack: null });
+    }
+  }, [isCalling]);
+
   return (
     <div className={styles.videoCallContainer}>
       {!isCalling ? (
