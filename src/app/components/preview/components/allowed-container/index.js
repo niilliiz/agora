@@ -5,6 +5,8 @@ import styles from "./allowed-container.module.css";
 import VideoContainer from "@/app/components/video-container";
 import MediaController from "@/app/components/media-controller";
 import AgoraRTC from "agora-rtc-react";
+import CameraOffContainer from "@/app/components/camera-off";
+import MicrophoneOffContainer from "@/app/components/microphone-off";
 
 function AllowedContainer({
   hasPermission,
@@ -31,8 +33,9 @@ function AllowedContainer({
         localCameraTrack: cameraTrack,
         localMicrophoneTrack: microphoneTrack,
       }));
-      setCameraOn(true);
-      setMicOn(true);
+      // todo
+      setCameraOn(false);
+      setMicOn(false);
       if (cameraTrack) {
         cameraTrack.play(videoContainerRef.current);
       }
@@ -42,7 +45,7 @@ function AllowedContainer({
       }
       setHasPermission(true);
     } catch (e) {
-      setHasPermission(false);
+      // setHasPermission(false);
       console.error(e, "User didn't give permission to both MICROPHONE or CAMERA");
     }
   }
@@ -92,6 +95,9 @@ function AllowedContainer({
     <div className={styles.allowedContainer}>
       <section className={styles.mediaContainer}>
         <div className={styles.videoWrapper}>
+          <CameraOffContainer detail="Camera is off" />
+          {/*todo: design if cam is on but mic is off*/}
+          {!micOn && <MicrophoneOffContainer detail="Microphone is off" />}
           <div className={styles.video} ref={videoContainerRef} />
         </div>
         <MediaController
