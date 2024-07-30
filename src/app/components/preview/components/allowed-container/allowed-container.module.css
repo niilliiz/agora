@@ -11,6 +11,8 @@
 
 /*----------------------MEDIA CONTAINER--------------*/
 .mediaContainer {
+  align-self: stretch;
+
   position: relative;
   display: flex;
   flex-direction: column;
@@ -38,12 +40,14 @@
 
 .infoContainer {
   align-self: center;
+
   display: flex;
   flex-direction: column;
   align-items: center;
+  white-space: nowrap;
 }
 
-.infoContainer > div {
+.allowedContainer .detailFlex {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,10 +57,12 @@
 .header {
   margin-bottom: 24px;
 }
+
 .doctorName {
   font-weight: 500;
   font-size: 16px;
 }
+
 .smallTitle {
   font-weight: 400;
   font-size: 12px;
@@ -76,16 +82,7 @@
 .sessionDetail {
   margin-bottom: 48px;
 }
-.date {
-}
-.time {
-}
-.sessionDuration {
-}
-.duration {
-}
-.footer {
-}
+
 .joinCTA {
   color: #fff;
   font-size: 14px;
@@ -94,5 +91,56 @@
   background-color: #232929;
   border-radius: 100px;
 }
-.sessionState {
+
+.allowedContainer .footerShortScreen {
+  display: none;
+}
+
+.footerBigScreen {
+  display: flex;
+}
+
+@media screen and (max-width: 800px) {
+  .allowedContainer {
+    flex-direction: column;
+    gap: 32px;
+  }
+  /*---------------MEDIA CONTAINER--------------*/
+  .mediaContainer {
+    order: 2;
+    align-self: center;
+  }
+
+  .videoWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: 450px;
+    border-radius: 4px;
+  }
+
+  .video {
+  }
+
+  /*----------------INFO CONTAINER-----------*/
+
+  .infoContainer {
+    margin-top: 26px;
+    order: 1;
+  }
+
+  .sessionDetail {
+    margin-bottom: 0px;
+  }
+
+  .allowedContainer .footerShortScreen {
+    display: flex;
+    order: 3;
+  }
+
+  .allowedContainer .infoContainer .footerBigScreen {
+    display: none;
+  }
 }

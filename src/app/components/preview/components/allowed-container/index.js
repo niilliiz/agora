@@ -33,9 +33,8 @@ function AllowedContainer({
         localCameraTrack: cameraTrack,
         localMicrophoneTrack: microphoneTrack,
       }));
-      // todo
-      setCameraOn(false);
-      setMicOn(false);
+      setCameraOn(true);
+      setMicOn(true);
       if (cameraTrack) {
         cameraTrack.play(videoContainerRef.current);
       }
@@ -111,11 +110,11 @@ function AllowedContainer({
       </section>
       {/*-----------------------------------*/}
       <section className={styles.infoContainer}>
-        <div className={styles.header}>
+        <div className={`${styles.header} ${styles.detailFlex}`}>
           <h2 className={styles.doctorName}>With James Rodrigo</h2>
           <div className={styles.smallTitle}>Cancer</div>
         </div>
-        <div className={styles.sessionDetail}>
+        <div className={`${styles.sessionDetail} ${styles.detailFlex}`}>
           <p className={styles.row}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -148,13 +147,19 @@ function AllowedContainer({
             <span className={styles.title}>12:30-13:00 (30 minutes duration)</span>
           </p>
         </div>
-        <div className={styles.footer}>
+        <div className={`${styles.footerBigScreen} ${styles.detailFlex}`}>
           <button className={styles.joinCTA} disabled={!hasPermission} onClick={() => onJoin()}>
             Join Now
           </button>
           <span className={styles.smallTitle}>You’re the first one here</span>
         </div>
       </section>
+      <div className={`${styles.footerShortScreen} ${styles.detailFlex}`}>
+        <button className={styles.joinCTA} disabled={!hasPermission} onClick={() => onJoin()}>
+          Join Now
+        </button>
+        <span className={styles.smallTitle}>You’re the first one here</span>
+      </div>
     </div>
   );
 }
