@@ -1,12 +1,12 @@
-import styles from "./not-allowed-container.module.css";
+import styles from "./permission-pending-modal.module.css";
 
-export default function NotAllowedContainer({ onClose }) {
+export default function PendingPermissionModal({ onClose }) {
   // what does close icon do
   // what does app icons do
   // what ok,got it do
 
   return (
-    <div className={styles.notAllowedContainer}>
+    <div className={styles.permissionPendingContainer}>
       <div className={styles.modalContainer}>
         <div className="modalHeader">
           <button onClick={onClose}>

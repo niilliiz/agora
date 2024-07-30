@@ -1,4 +1,6 @@
 import styles from "./media-controller.module.css";
+import { useState } from "react";
+import PermissionInstructionModal from "@/app/components/preview/components/permission-instruction-modal";
 
 function MediaController({
   className = "",
@@ -10,7 +12,27 @@ function MediaController({
   onVolumeChange,
   onOpenMoreInfo,
   onOpenNotepad,
+  permissionState,
 }) {
+  const [openPermissionInstructionModal, setOpenPermissionInstructionModal] = useState(false);
+  // if permissionState === 'granted' => just disable of enable the camera and mic...
+  //if permissionState ==='rejected' => open instruction modal
+
+  function handleSwitchCameraState() {
+    if (permissionState === "granted") {
+      setCameraOn();
+    } else {
+      setOpenPermissionInstructionModal(true);
+    }
+  }
+  function handleSwitchMicState() {
+    if (permissionState === "granted") {
+      setMicOn();
+    } else {
+      setOpenPermissionInstructionModal(true);
+    }
+  }
+
   const cameraIcon = cameraOn ? (
     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
       <path
@@ -56,13 +78,13 @@ function MediaController({
       )}
       <button
         className={`${styles.controller} ${micOn ? styles.enable : styles.disable}`}
-        onClick={setMicOn}
+        onClick={handleSwitchMicState}
       >
         {micIcon}
       </button>
       <button
         className={`${styles.controller} ${cameraOn ? styles.enable : styles.disable}`}
-        onClick={setCameraOn}
+        onClick={handleSwitchCameraState}
       >
         {cameraIcon}
       </button>
@@ -76,6 +98,7 @@ function MediaController({
           LEAVE
         </button>
       )}
+      {openPermissionInstructionModal && <PermissionInstructionModal />}
     </div>
   );
 }

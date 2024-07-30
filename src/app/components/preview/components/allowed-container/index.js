@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import styles from "./allowed-container.module.css";
-import VideoContainer from "@/app/components/video-container";
 import MediaController from "@/app/components/media-controller";
 import AgoraRTC from "agora-rtc-react";
 import CameraOffContainer from "@/app/components/camera-off";
@@ -108,6 +107,7 @@ function AllowedContainer({
           setCameraOn={setCameraOn}
           setMicOn={setMicOn}
           localTracks={localTracks}
+          permissionState={permissionState}
         />
       </section>
       {/*-----------------------------------*/}
