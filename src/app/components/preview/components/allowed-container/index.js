@@ -112,7 +112,7 @@ function AllowedContainer({
       <section className={styles.infoContainer}>
         <div className={`${styles.header} ${styles.detailFlex}`}>
           <h2 className={styles.doctorName}>With James Rodrigo</h2>
-          <div className={styles.smallTitle}>Cancer</div>
+          <div className={`${styles.smallTitle} ${styles.specialityTitle}`}>Cancer</div>
         </div>
         <div className={`${styles.sessionDetail} ${styles.detailFlex}`}>
           <p className={styles.row}>
