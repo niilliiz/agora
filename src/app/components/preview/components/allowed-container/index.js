@@ -151,6 +151,7 @@ function AllowedContainer({
           <button className={styles.joinCTA} disabled={!hasPermission} onClick={() => onJoin()}>
             Join Now
           </button>
+          {/*todo: this is based on nothing*/}
           <span className={styles.smallTitle}>You’re the first one here</span>
         </div>
       </section>
@@ -158,6 +159,7 @@ function AllowedContainer({
         <button className={styles.joinCTA} disabled={!hasPermission} onClick={() => onJoin()}>
           Join Now
         </button>
+        {/*todo: this is based on nothing*/}
         <span className={styles.smallTitle}>You’re the first one here</span>
       </div>
     </div>
