@@ -15,7 +15,6 @@ export default function Preview({
 }) {
   const [hasPermission, setHasPermission] = useState(false);
 
-  console.log(hasPermission);
   return (
     <Container>
       <div className={styles.previewContainer}>
