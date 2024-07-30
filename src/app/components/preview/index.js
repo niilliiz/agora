@@ -4,6 +4,10 @@ import NotAllowedContainer from "@/app/components/preview/components/not-allowed
 import AllowedContainer from "@/app/components/preview/components/allowed-container";
 import Container from "@/app/components/layout-components/container";
 
+const Permission_States = {
+  1: "grea",
+};
+
 export default function Preview({
   onJoin,
   micOn,
@@ -13,7 +17,16 @@ export default function Preview({
   localTracks,
   setLocalTracks,
 }) {
-  const [hasPermission, setHasPermission] = useState(false);
+  // const [permission, set] = useState(false);
+  const [permissionState, setPermissionState] = useState("denied");
+
+  function handlePermissionState(value) {
+    setPermissionState(value);
+  }
+
+  // function handleClosePermissionModal() {
+  //   setHasPermission(true);
+  // }
 
   return (
     <Container>
@@ -24,12 +37,12 @@ export default function Preview({
           setMicOn={setMicOn}
           setCameraOn={setCameraOn}
           onJoin={onJoin}
-          hasPermission={hasPermission}
-          setHasPermission={value => setHasPermission(value)}
+          permissionState={permissionState}
+          setPermissionState={value => handlePermissionState(value)}
           localTracks={localTracks}
           setLocalTracks={setLocalTracks}
         />
-        {!hasPermission && <NotAllowedContainer />}
+        {/*{!permission && <NotAllowedContainer onClose={() => handleClosePermissionModal()} />}*/}
       </div>
     </Container>
   );

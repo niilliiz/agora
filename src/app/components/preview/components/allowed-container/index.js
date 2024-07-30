@@ -9,8 +9,8 @@ import CameraOffContainer from "@/app/components/camera-off";
 import MicrophoneOffContainer from "@/app/components/microphone-off";
 
 function AllowedContainer({
-  hasPermission,
-  setHasPermission,
+  permissionState,
+  setPermissionState,
   onJoin,
   micOn,
   setMicOn,
@@ -23,6 +23,8 @@ function AllowedContainer({
   const videoContainerRef = useRef(null);
 
   const { localCameraTrack, localMicrophoneTrack } = localTracks;
+
+  const hasPermission = permissionState === "granted";
 
   async function requestCameraAndMicrophonePermission() {
     // todo: we force user to give permission for both medias, if we want to force them just to give for the one of them, we can use createCameraVideoTrack or createMicrophoneAudioTrack separately
@@ -42,9 +44,9 @@ function AllowedContainer({
       if (microphoneTrack) {
         microphoneTrack.play();
       }
-      setHasPermission(true);
+      setPermissionState("granted");
     } catch (e) {
-      // setHasPermission(false);
+      setPermissionState("denied");
       console.error(e, "User didn't give permission to both MICROPHONE or CAMERA");
     }
   }
@@ -96,7 +98,7 @@ function AllowedContainer({
         <div className={styles.videoWrapper}>
           <CameraOffContainer detail="Camera is off" />
           {/*todo: design if cam is on but mic is off*/}
-          {!micOn && <MicrophoneOffContainer detail="Microphone is off" />}
+          {hasPermission && !micOn && <MicrophoneOffContainer detail="Microphone is off" />}
           <div className={styles.video} ref={videoContainerRef} />
         </div>
         <MediaController
