@@ -4,6 +4,7 @@ import PermissionInstructionModal from "@/app/components/preview/components/perm
 
 function MediaController({
   className = "",
+  isJoined = false,
   micOn,
   cameraOn,
   setMicOn,
@@ -20,17 +21,17 @@ function MediaController({
   //if permissionState ==='rejected' => open instruction modal
 
   function handleSwitchCameraState() {
-    if (permissionState === "granted") {
+    if (isJoined || permissionState === "granted") {
       setCameraOn();
     } else {
-      openPendingPermissionModal();
+      openPendingPermissionModal && openPendingPermissionModal();
     }
   }
   function handleSwitchMicState() {
-    if (permissionState === "granted") {
+    if (isJoined || permissionState === "granted") {
       setMicOn();
     } else {
-      openPendingPermissionModal();
+      openPendingPermissionModal && openPendingPermissionModal();
     }
   }
 
