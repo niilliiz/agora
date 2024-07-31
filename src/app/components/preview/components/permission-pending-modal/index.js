@@ -2,6 +2,8 @@ import styles from "./permission-pending-modal.module.css";
 import Image from "next/image";
 
 import QRPicture from "../../../../../../public/img/download-app/qrCodeNew.png";
+import { useEffect, useRef } from "react";
+import Backdrop from "@/app/components/layout-components/backddrop";
 
 export default function PendingPermissionModal({ onClose }) {
   // what does close icon do
@@ -9,7 +11,7 @@ export default function PendingPermissionModal({ onClose }) {
   // what ok,got it do
 
   return (
-    <div className={styles.permissionPendingContainer}>
+    <Backdrop onAction={onClose}>
       <div className={styles.modalContainer}>
         <div className={styles.modalHeader}>
           <button onClick={onClose}>
@@ -101,6 +103,6 @@ export default function PendingPermissionModal({ onClose }) {
           </div>
         </div>
       </div>
-    </div>
+    </Backdrop>
   );
 }
