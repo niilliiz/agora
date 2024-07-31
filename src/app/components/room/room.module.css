@@ -2,8 +2,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
   gap: 32px;
+
+  height: 100%;
   width: 100%;
   padding: 32px;
 }
@@ -25,6 +26,8 @@
 .videoWrapper {
   display: flex;
   gap: 50px;
+  width: 400px;
+  height: 400px;
 }
 
 .video {

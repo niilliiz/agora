@@ -75,6 +75,7 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave, 
         )}
 
         <MediaController
+          isJoined
           micOn={micOn}
           cameraOn={cameraOn}
           setCameraOn={setCameraOn}

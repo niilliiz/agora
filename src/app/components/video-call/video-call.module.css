@@ -12,6 +12,9 @@
   align-items: center;
 }
 
+.isCallingContainer {
+}
+
 @media screen and (max-width: 600px) {
   .videoCallContainer {
     gap: 16px;

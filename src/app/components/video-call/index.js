@@ -13,6 +13,11 @@ export default function VideoCall() {
   const [micOn, setMicOn] = useState(false);
   const [cameraOn, setCameraOn] = useState(false);
 
+  const [localTracks, setLocalTracks] = useState({
+    localCameraTrack: null,
+    localMicrophoneTrack: null,
+  });
+
   function handleJoinButtonClicked() {
     setIsCalling(true);
   }
@@ -38,11 +43,6 @@ export default function VideoCall() {
   function handleSetMicOn() {
     setMicOn(prevMic => !prevMic);
   }
-
-  const [localTracks, setLocalTracks] = useState({
-    localCameraTrack: null,
-    localMicrophoneTrack: null,
-  });
 
   useMemo(() => {
     if (!isCalling) {
@@ -90,7 +90,7 @@ export default function VideoCall() {
               />
             </svg>
           </div>
-          {/*  this is where other part of call header would be placed*/}
+          {/*  this is where other part of call header like support would be placed*/}
           {isCalling && <div>countdown</div>}
         </div>
       </Container>
@@ -105,15 +105,18 @@ export default function VideoCall() {
           setLocalTracks={setLocalTracks}
         />
       ) : !isLoading && isConnected ? (
-        <Room
-          micOn={micOn}
-          cameraOn={cameraOn}
-          setMicOn={() => handleSetMicOn()}
-          setCameraOn={() => handleSetCamOn()}
-          onLeave={() => handleLeaveButtonClicked()}
-          localTracks={localTracks}
-          setLocalTracks={setLocalTracks}
-        />
+        <div className={styles.isCallingContainer}>
+          <Room
+            micOn={micOn}
+            cameraOn={cameraOn}
+            setMicOn={() => handleSetMicOn()}
+            setCameraOn={() => handleSetCamOn()}
+            onLeave={() => handleLeaveButtonClicked()}
+            localTracks={localTracks}
+            setLocalTracks={setLocalTracks}
+          />
+          {/*todo: this is where u pull support questions :)*/}
+        </div>
       ) : //   todo: handle when isLoading is true and error happens
       null}
     </div>
