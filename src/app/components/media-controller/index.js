@@ -13,6 +13,7 @@ function MediaController({
   onOpenMoreInfo,
   onOpenNotepad,
   permissionState,
+  openPendingPermissionModal,
 }) {
   const [openPermissionInstructionModal, setOpenPermissionInstructionModal] = useState(false);
   // if permissionState === 'granted' => just disable of enable the camera and mic...
@@ -22,14 +23,14 @@ function MediaController({
     if (permissionState === "granted") {
       setCameraOn();
     } else {
-      setOpenPermissionInstructionModal(true);
+      openPendingPermissionModal();
     }
   }
   function handleSwitchMicState() {
     if (permissionState === "granted") {
       setMicOn();
     } else {
-      setOpenPermissionInstructionModal(true);
+      openPendingPermissionModal();
     }
   }
 

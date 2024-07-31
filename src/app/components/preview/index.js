@@ -16,6 +16,7 @@ export default function Preview({
   localTracks,
   setLocalTracks,
 }) {
+  // pending - granted - denied
   const [permissionState, setPermissionState] = useState("pending");
 
   const [pendingPermissionModal, setPendingPermissionModal] = useState(false);
@@ -28,6 +29,20 @@ export default function Preview({
     setPendingPermissionModal(false);
   }
 
+  function handleOpenPendingPermissionModal() {
+    setPendingPermissionModal(true);
+  }
+
+  function handleJoinTheRoom() {
+    if (permissionState === "granted") {
+      onJoin();
+    } else {
+      handleOpenPendingPermissionModal();
+    }
+  }
+
+  // todo: if granted => openPend=false, if denied, pending => openPend=true
+
   return (
     <Container>
       <div className={styles.previewContainer}>
@@ -36,13 +51,15 @@ export default function Preview({
           cameraOn={cameraOn}
           setMicOn={setMicOn}
           setCameraOn={setCameraOn}
-          onJoin={onJoin}
+          onJoin={handleJoinTheRoom}
           permissionState={permissionState}
           setPermissionState={value => handlePermissionState(value)}
           localTracks={localTracks}
           setLocalTracks={setLocalTracks}
+          openPendingPermissionModal={() => handleOpenPendingPermissionModal()}
         />
-        {permissionState === "pending" && (
+        {/*todo: change denied to pending- it is denied it's  always opened */}
+        {pendingPermissionModal && (
           <PendingPermissionModal onClose={() => handleClosePendingPermissionModal()} />
         )}
       </div>

@@ -16,6 +16,106 @@
 
 .modalContainer {
   background-color: #fff;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 16px;
+  width: 95%;
+  max-width: 600px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.modalHeader {
+  align-self: flex-end;
+}
+
+.modalBody {
+  align-self: center;
+  margin-top: 8px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.bodyWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.title {
+  color: #3a4b5e;
+  font-size: 16px;
+  font-weight: 500;
+}
+.bodyDescription {
+  color: #62778f;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.bodyCTA {
+  border-bottom: 1px solid #232929;
+  padding-bottom: 4px;
+
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #232929;
+}
+
+.modalFooter {
+  margin-top: 48px;
+
+  padding: 16px;
+  border: 1px solid #d6dcdc;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.footerDescription {
+  align-self: center;
+
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #3a4b5e;
+}
+
+.appContainer {
+  align-self: center;
+
+  display: flex;
+  gap: 16px;
+}
+
+.footerWrapper {
+  align-self: center;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footerCTA {
+  background-color: #232929;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 100px;
+  padding: 14px 24px 14px 24px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 0;
+}
+
+.qrImg {
+  object-position: center;
 }

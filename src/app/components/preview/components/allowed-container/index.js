@@ -17,6 +17,7 @@ function AllowedContainer({
   setCameraOn,
   localTracks,
   setLocalTracks,
+  openPendingPermissionModal,
 }) {
   let isInitialRenderRef = useRef(true);
   const videoContainerRef = useRef(null);
@@ -108,6 +109,7 @@ function AllowedContainer({
           setMicOn={setMicOn}
           localTracks={localTracks}
           permissionState={permissionState}
+          openPendingPermissionModal={openPendingPermissionModal}
         />
       </section>
       {/*-----------------------------------*/}
@@ -150,19 +152,15 @@ function AllowedContainer({
           </p>
         </div>
         <div className={`${styles.footerBigScreen} ${styles.detailFlex}`}>
-          <button className={styles.joinCTA} disabled={!hasPermission} onClick={() => onJoin()}>
+          <button className={styles.joinCTA} onClick={() => onJoin()}>
             Join Now
           </button>
-          {/*todo: this is based on nothing*/}
-          <span className={styles.smallTitle}>You’re the first one here</span>
         </div>
       </section>
       <div className={`${styles.footerShortScreen} ${styles.detailFlex}`}>
-        <button className={styles.joinCTA} disabled={!hasPermission} onClick={() => onJoin()}>
+        <button className={styles.joinCTA} onClick={() => onJoin()}>
           Join Now
         </button>
-        {/*todo: this is based on nothing*/}
-        <span className={styles.smallTitle}>You’re the first one here</span>
       </div>
     </div>
   );
