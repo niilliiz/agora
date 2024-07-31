@@ -1,5 +1,5 @@
 import styles from "./preview.module.css";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import AllowedContainer from "@/app/components/preview/components/allowed-container";
 import Container from "@/app/components/layout-components/container";
 import PendingPermissionModal from "@/app/components/preview/components/permission-pending-modal";
@@ -41,7 +41,13 @@ export default function Preview({
     }
   }
 
-  // todo: if granted => openPend=false, if denied, pending => openPend=true
+  useMemo(() => {
+    if (permissionState === "granted") {
+      setPendingPermissionModal(false);
+    } else {
+      setPendingPermissionModal(true);
+    }
+  }, [permissionState]);
 
   return (
     <Container>
@@ -58,7 +64,6 @@ export default function Preview({
           setLocalTracks={setLocalTracks}
           openPendingPermissionModal={() => handleOpenPendingPermissionModal()}
         />
-        {/*todo: change denied to pending- it is denied it's  always opened */}
         {pendingPermissionModal && (
           <PendingPermissionModal onClose={() => handleClosePendingPermissionModal()} />
         )}
