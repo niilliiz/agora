@@ -1,4 +1,4 @@
-import styles from "./permission-instruction-modal.css";
+import styles from "./permission-instruction-modal.module.css";
 
 export default function PermissionInstructionModal() {
   return (
