@@ -20,10 +20,10 @@
   transition-property: background-color, border;
 }
 
-.controller.disable {
+.controller.off {
   background-color: #e62100;
   border: 1px solid #e62100;
 }
-.controller.enable {
+.controller.on {
   background-color: transparent;
 }

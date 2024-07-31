@@ -79,13 +79,13 @@ function MediaController({
         </button>
       )}
       <button
-        className={`${styles.controller} ${micOn ? styles.enable : styles.disable}`}
+        className={`${styles.controller} ${micOn ? styles.on : styles.off}`}
         onClick={handleSwitchMicState}
       >
         {micIcon}
       </button>
       <button
-        className={`${styles.controller} ${cameraOn ? styles.enable : styles.disable}`}
+        className={`${styles.controller} ${cameraOn ? styles.on : styles.off}`}
         onClick={handleSwitchCameraState}
       >
         {cameraIcon}
@@ -96,8 +96,19 @@ function MediaController({
         </button>
       )}
       {onLeave && (
-        <button className={styles.controller} onClick={() => onLeave()}>
-          LEAVE
+        <button className={`${styles.controller} ${styles.off}`} onClick={() => onLeave()}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+          >
+            <path
+              d="M16.6136 11.3794C16.4649 11.5695 16.2589 11.7067 16.0262 11.7708C15.7935 11.8348 15.5464 11.8223 15.3213 11.7352L11.876 10.5124L11.8556 10.5047C11.6833 10.4358 11.5307 10.3253 11.4115 10.1831C11.2922 10.0409 11.21 9.87143 11.1721 9.68977L10.7355 7.59797C9.60268 7.21198 8.37349 7.2147 7.24238 7.60571L6.82754 9.68133C6.79095 9.86501 6.70909 10.0366 6.58937 10.1807C6.46966 10.3247 6.31588 10.4365 6.14199 10.5061L6.1216 10.5138L2.67629 11.7352C2.5484 11.7856 2.41227 11.8118 2.27481 11.8125C2.1037 11.8128 1.93477 11.7741 1.78089 11.6993C1.627 11.6245 1.4922 11.5155 1.38676 11.3808C0.175274 9.81844 0.310977 7.74493 1.71652 6.33868C5.66457 2.38922 12.3337 2.38922 16.2839 6.33868C17.6894 7.74352 17.8251 9.81704 16.6136 11.3794ZM15.1877 13.5H2.8127C2.66351 13.5 2.52044 13.5593 2.41495 13.6648C2.30946 13.7702 2.2502 13.9133 2.2502 14.0625C2.2502 14.2117 2.30946 14.3548 2.41495 14.4603C2.52044 14.5657 2.66351 14.625 2.8127 14.625H15.1877C15.3369 14.625 15.48 14.5657 15.5854 14.4603C15.6909 14.3548 15.7502 14.2117 15.7502 14.0625C15.7502 13.9133 15.6909 13.7702 15.5854 13.6648C15.48 13.5593 15.3369 13.5 15.1877 13.5Z"
+              fill="white"
+            />
+          </svg>
         </button>
       )}
       {openPermissionInstructionModal && <PermissionInstructionModal />}
