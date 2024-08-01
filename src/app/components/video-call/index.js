@@ -47,6 +47,12 @@ export default function VideoCall() {
     setMicOn(prevMic => !prevMic);
   }
 
+  useMemo(() => {
+    if (!isCalling) {
+      setLocalTracks({ localCameraTrack: null, localMicrophoneTrack: null });
+    }
+  }, [isCalling]);
+
   return (
     <div className={styles.videoCallContainer}>
       <Container>

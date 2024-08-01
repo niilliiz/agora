@@ -14,7 +14,6 @@
 
 .isCallingContainer {
   height: 600px;
-  border: 1px solid green;
 }
 
 @media screen and (max-width: 600px) {
