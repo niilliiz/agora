@@ -1,12 +1,6 @@
 import styles from "./video-call.module.css";
 import { useMemo, useState } from "react";
-import {
-  useClientEvent,
-  useConnectionState,
-  useJoin,
-  useRemoteUsers,
-  useRTCClient,
-} from "agora-rtc-react";
+import { useJoin } from "agora-rtc-react";
 import { appConfig } from "@/utils/app-config";
 import Room from "@/app/components/room";
 import Preview from "@/app/components/preview";
@@ -14,11 +8,7 @@ import Container from "@/app/components/layout-components/container";
 
 export default function VideoCall() {
   const [isCalling, setIsCalling] = useState(false);
-  // const [logSink, setLogSink] = useState([]);
 
-  const client = useRTCClient();
-
-  // todo: maybe it would be a good idea if we put mic and cam in context and use it in the room and preview
   const [micOn, setMicOn] = useState(false);
   const [cameraOn, setCameraOn] = useState(false);
 
@@ -31,15 +21,7 @@ export default function VideoCall() {
   //   console.log(
   //     `connection-state-change,curState: ${curState},revState: ${revState},reason: ${reason}`,
   //   );
-  //   setLogSink(logs =>
-  //     logs.concat({
-  //       eventName: "connection-state-change",
-  //       value: `curState: ${curState},revState: ${revState},reason: ${reason}`,
-  //     }),
-  //   );
   // });
-
-  // console.log(logSink, "sinkConnection");
 
   function handleJoinButtonClicked() {
     setIsCalling(true);
@@ -50,7 +32,6 @@ export default function VideoCall() {
   }
 
   // todo: u can handle the error here - if there is error - if it's not connected
-  // this is the way to join the room
   const { data, isLoading, isConnected, error } = useJoin(
     {
       appid: appConfig.appId,
@@ -65,14 +46,6 @@ export default function VideoCall() {
   function handleSetMicOn() {
     setMicOn(prevMic => !prevMic);
   }
-
-  useMemo(() => {
-    if (!isCalling) {
-      setLocalTracks({ localCameraTrack: null, localMicrophoneTrack: null });
-      setMicOn(false);
-      setCameraOn(false);
-    }
-  }, [isCalling]);
 
   return (
     <div className={styles.videoCallContainer}>
@@ -150,22 +123,3 @@ export default function VideoCall() {
     </div>
   );
 }
-
-//  <button onClick={handleJoinButtonClicked}>join</button>
-//       {isCalling && (
-//         <Room
-//           micOn={micOn}
-//           cameraOn={cameraOn}
-//           setMicOn={() => handleSetMicOn()}
-//           setCameraOn={() => handleSetCamOn()}
-//           onLeave={() => handleLeaveButtonClicked()}
-//         />
-//       )}
-
-/*
- * todo
- *  1-handle loading here
- * 2-handle error here
- * 3- replace design system button with custom button
- *
- *  */
