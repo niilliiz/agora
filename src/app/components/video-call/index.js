@@ -1,6 +1,12 @@
 import styles from "./video-call.module.css";
 import { useMemo, useState } from "react";
-import { useJoin } from "agora-rtc-react";
+import {
+  useClientEvent,
+  useConnectionState,
+  useJoin,
+  useRemoteUsers,
+  useRTCClient,
+} from "agora-rtc-react";
 import { appConfig } from "@/utils/app-config";
 import Room from "@/app/components/room";
 import Preview from "@/app/components/preview";
@@ -8,6 +14,9 @@ import Container from "@/app/components/layout-components/container";
 
 export default function VideoCall() {
   const [isCalling, setIsCalling] = useState(false);
+  // const [logSink, setLogSink] = useState([]);
+
+  const client = useRTCClient();
 
   // todo: maybe it would be a good idea if we put mic and cam in context and use it in the room and preview
   const [micOn, setMicOn] = useState(false);
@@ -17,6 +26,20 @@ export default function VideoCall() {
     localCameraTrack: null,
     localMicrophoneTrack: null,
   });
+
+  // useClientEvent(client, "connection-state-change", (curState, revState, reason) => {
+  //   console.log(
+  //     `connection-state-change,curState: ${curState},revState: ${revState},reason: ${reason}`,
+  //   );
+  //   setLogSink(logs =>
+  //     logs.concat({
+  //       eventName: "connection-state-change",
+  //       value: `curState: ${curState},revState: ${revState},reason: ${reason}`,
+  //     }),
+  //   );
+  // });
+
+  // console.log(logSink, "sinkConnection");
 
   function handleJoinButtonClicked() {
     setIsCalling(true);
@@ -36,7 +59,6 @@ export default function VideoCall() {
     },
     isCalling,
   );
-
   function handleSetCamOn() {
     setCameraOn(prevCamera => !prevCamera);
   }
@@ -104,21 +126,27 @@ export default function VideoCall() {
           localTracks={localTracks}
           setLocalTracks={setLocalTracks}
         />
-      ) : !isLoading && isConnected ? (
+      ) : (
         <div className={styles.isCallingContainer}>
-          <Room
-            micOn={micOn}
-            cameraOn={cameraOn}
-            setMicOn={() => handleSetMicOn()}
-            setCameraOn={() => handleSetCamOn()}
-            onLeave={() => handleLeaveButtonClicked()}
-            localTracks={localTracks}
-            setLocalTracks={setLocalTracks}
-          />
-          {/*todo: this is where u pull support questions :)*/}
+          {!isLoading && isConnected ? (
+            <>
+              <Room
+                micOn={micOn}
+                cameraOn={cameraOn}
+                setMicOn={() => handleSetMicOn()}
+                setCameraOn={() => handleSetCamOn()}
+                onLeave={() => handleLeaveButtonClicked()}
+                localTracks={localTracks}
+                setLocalTracks={setLocalTracks}
+              />
+              {/*todo: this is where u pull support questions :)*/}
+            </>
+          ) : (
+            //todo: this is where isLoading true
+            <></>
+          )}
         </div>
-      ) : //   todo: handle when isLoading is true and error happens
-      null}
+      )}
     </div>
   );
 }

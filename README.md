@@ -36,21 +36,16 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 
-### Todos
-    1- send log
-    2- detail modal
-    3- end session error modal
-    4- notice end session modal
-    5- participant ui
-    6- header
-    7- downloadApp
-    8- countDownTimer
-    9- preview page ui
-    10- participant ui
-    11- room ui
-    12- performance issues => useCallback and useMemo for functions...
+### improvements
+    1- performance issues => useCallback and useMemo for functions...i have to detect which components get rerendered reapeatedly and try to prevent it as much as possible :).
+    2- we can get the connection's state of local user, so it's would be a good idea if we get the reconnecting state and then show loading state, or give local some time like 10 seconds to come back, and then throw them outside of room and force them to rejoin
+    3- when we hit the join button, it takes little time  to join which is indicated by isLoading property that agora itself gives it to us, it would be a good idea if we can show loading state to local user
+    4- when user doesn't give permission to any of the media devices, we can show a modal to give them an instruction of how they can give permission to the media devices
+
+    
 
 #### References 
 
 * [Connection Status Management](https://docs.agora.io/en/video-calling/enhance-call-quality/connection-status-management?platform=web)
 * [Video-SDK Web](https://api-ref.agora.io/en/video-sdk/web/4.x/globals.html)
+* [Agora-React-Example](https://agoraio-extensions.github.io/agora-rtc-react/basic/#/Basic/overview)

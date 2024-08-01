@@ -1,22 +1,18 @@
 import styles from "./room.module.css";
 
 import AgoraRTC, {
-  LocalAudioTrack,
-  LocalVideoTrack,
+  useConnectionState,
   useIsConnected,
   usePublish,
-  useRemoteAudioTracks,
-  useRemoteUsers,
-  useRemoteVideoTracks,
   useRTCClient,
 } from "agora-rtc-react";
 import MediaController from "@/app/components/media-controller";
-import { useEffect, useRef } from "react";
-import VideoContainer from "@/app/components/video-container";
+import { useEffect } from "react";
+import Container from "@/app/components/layout-components/container";
+import RemoteVideoContainer from "@/app/components/room/components/remote-video-container";
+import LocalVideoContainer from "@/app/components/room/components/local-video-container";
 
 export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave, localTracks }) {
-  const remoteVideoRef = useRef(null);
-
   const isConnected = useIsConnected();
   const client = useRTCClient();
 
@@ -28,24 +24,11 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave, 
     onLeave();
   }
 
-  const remoteUsers = useRemoteUsers();
-  const remoteCameraOn = remoteUsers.filter(user => user.hasVideo);
-  const remoteMicOn = remoteUsers.filter(user => user.hasAudio);
-  const publishedUsers = remoteUsers.filter(user => user.hasAudio || user.hasVideo);
-
-  console.log(remoteCameraOn, "reCam");
-  console.log(remoteMicOn, "reMic");
-
-  const { videoTracks: remoteCameraTracks } = useRemoteVideoTracks(remoteUsers);
-  const { audioTracks: remoteMicrophoneTracks } = useRemoteAudioTracks(remoteUsers);
-  remoteMicrophoneTracks.map(track => track.play());
-
   async function handleTracks() {
-    console.log("here");
     try {
       await client.publish([localCameraTrack, localMicrophoneTrack]);
     } catch (error) {
-      console.error(error, "while handle track");
+      console.error(error, "while publishing track");
     }
   }
 
@@ -55,24 +38,25 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave, 
     }
   }, [isConnected, client, localCameraTrack, localMicrophoneTrack]);
 
-  useEffect(() => {
-    if (remoteCameraTracks.length > 0 && remoteVideoRef.current) {
-      remoteCameraTracks.map(track => track.play(remoteVideoRef.current));
-    }
-    //   todo: handle unmount component
-  }, [remoteCameraTracks.length]);
-
   return (
-    <div className={styles.roomContainer}>
-      <h1>Room</h1>
-      <div className={styles.videoContainer}>
-        {isConnected && (
-          <div className={styles.videoWrapper}>
-            <VideoContainer ref={remoteVideoRef} />
-            <LocalVideoTrack track={localCameraTrack} play={cameraOn} disabled={!cameraOn} />
-            <LocalAudioTrack track={localMicrophoneTrack} play={micOn} disabled={!micOn} />
-          </div>
-        )}
+    <Container>
+      <div className={styles.roomContainer}>
+        <div className={styles.container}>
+          {isConnected && (
+            <div className={styles.videosWrapper}>
+              {/*Local Video Container*/}
+              <RemoteVideoContainer />
+
+              {/*Local Video Container*/}
+              <LocalVideoContainer
+                cameraOn={cameraOn}
+                micOn={micOn}
+                localCameraTrack={localCameraTrack}
+                localMicrophoneTrack={localMicrophoneTrack}
+              />
+            </div>
+          )}
+        </div>
 
         <MediaController
           isJoined
@@ -83,8 +67,12 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave, 
           onLeave={() => handleLeaveTheRoom()}
         />
       </div>
-    </div>
+    </Container>
   );
 }
 
 //https://api-ref.agora.io/en/video-sdk/web/4.x/interfaces/iagorartcclient.html#publish
+
+// todo:
+
+// 1- handle koni k aya remote
