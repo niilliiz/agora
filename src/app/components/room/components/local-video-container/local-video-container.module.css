@@ -1,2 +1,10 @@
 .localVideoContainer {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  width: 260px;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 2px solid red;
 }
