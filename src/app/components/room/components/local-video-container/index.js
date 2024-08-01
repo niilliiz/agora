@@ -1,5 +1,5 @@
 import styles from "./local-video-container.module.css";
-import { LocalAudioTrack, LocalVideoTrack, usePublish } from "agora-rtc-react";
+import { LocalAudioTrack, LocalVideoTrack } from "agora-rtc-react";
 import CameraOffContainer from "@/app/components/camera-off";
 import UserState from "@/app/components/room/components/user-state";
 
@@ -9,7 +9,6 @@ export default function LocalVideoContainer({
   localCameraTrack,
   localMicrophoneTrack,
 }) {
-  // connection-state-change,curState: RECONNECTING,revState: CONNECTED,reason: undefined
   return (
     <div className={styles.localVideoContainer}>
       <CameraOffContainer />
