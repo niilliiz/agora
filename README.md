@@ -41,6 +41,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
     2- we can get the connection's state of local user, so it's would be a good idea if we get the reconnecting state and then show loading state, or give local some time like 10 seconds to come back, and then throw them outside of room and force them to rejoin
     3- when we hit the join button, it takes little time  to join which is indicated by isLoading property that agora itself gives it to us, it would be a good idea if we can show loading state to local user
     4- when user doesn't give permission to any of the media devices, we can show a modal to give them an instruction of how they can give permission to the media devices
+    5- check responsive in all parts
+
 
     
 
