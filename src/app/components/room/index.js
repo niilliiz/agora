@@ -39,12 +39,11 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave, 
   }, [isConnected, client, localCameraTrack, localMicrophoneTrack]);
 
   return (
-    <Container>
+    <Container className={styles.container}>
       <div className={styles.roomContainer}>
-        <div className={styles.container}>
+        <div className={styles.videosWrapper}>
           {isConnected && (
-            <div className={styles.videosWrapper}>
-              {/*Local Video Container*/}
+            <>
               <RemoteVideoContainer />
 
               {/*Local Video Container*/}
@@ -54,7 +53,7 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave, 
                 localCameraTrack={localCameraTrack}
                 localMicrophoneTrack={localMicrophoneTrack}
               />
-            </div>
+            </>
           )}
         </div>
 

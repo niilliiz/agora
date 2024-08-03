@@ -7,17 +7,11 @@
   width: 100%;
 }
 
-.container {
+.videosWrapper {
   width: 100%;
   height: 100%;
-}
-
-.videosWrapper {
   align-self: stretch;
   position: relative;
-
-  width: 100%;
-  height: 100%;
 }
 
 .localVideoContainer {
@@ -27,5 +21,8 @@
   height: 250px;
 }
 
-.remoteVideoContainer {
+@media screen and (max-width: 600px) {
+  .container {
+    width: 100% !important;
+  }
 }
