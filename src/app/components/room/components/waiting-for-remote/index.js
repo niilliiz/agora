@@ -23,7 +23,7 @@ export default function WaitingForRemoteUser() {
           />
           <path d="M8 3.33337V8.00004L10.6667 10.6667" stroke="white" stroke-linecap="round" />
         </svg>
-        <span>30 minutes duration</span>
+        <span>{duration} minutes duration</span>
       </p>
     </div>
   );
