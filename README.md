@@ -43,6 +43,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
     4- when user doesn't give permission to any of the media devices, we can show a modal to give them an instruction of how they can give permission to the media devices
     5- check responsive in all parts
     6- if remote user and local user both turn off the camera -> ui
+    7- in timer, animation in expanding and animation of the svg
 
 
     

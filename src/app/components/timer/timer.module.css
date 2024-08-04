@@ -1,2 +1,36 @@
 .timerContainer {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.14);
+  padding: 7px 16px;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.expandedContainer {
+  /*width: 665px;*/
+}
+
+.timerContainer.warningTimer {
+  background-color: #e62100;
+}
+.notExpandedContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.timerContent {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 0;
+}
+
+.expandIcon {
+  rotate: 0deg;
+  transition: rotate 0.3s ease-in-out;
+}
+
+.expandIcon.isExpanded {
+  rotate: 180deg;
 }

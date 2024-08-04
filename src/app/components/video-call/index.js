@@ -41,6 +41,8 @@ export default function VideoCall() {
     },
     isCalling,
   );
+
+  console.log(data, "isCalling");
   function handleSetCamOn() {
     setCameraOn(prevCamera => !prevCamera);
   }
@@ -58,7 +60,7 @@ export default function VideoCall() {
     <div className={styles.videoCallContainer}>
       <Container>
         <div className={styles.header}>
-          <div className="logoWrapper">
+          <div className={styles.logoWrapper}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="76"
@@ -93,7 +95,9 @@ export default function VideoCall() {
             </svg>
           </div>
           {/*  this is where other part of call header like support would be placed*/}
-          {isCalling && <Timer className={styles.bigScreenTimer} />}
+          {isCalling && (
+            <Timer key={data} className={styles.bigScreenTimer} autoStart={isCalling} />
+          )}
         </div>
       </Container>
       {!isCalling ? (

@@ -12,6 +12,9 @@
   justify-content: space-between;
   align-items: center;
 }
+.logoWrapper {
+  /*flex-grow: 1;*/
+}
 
 .isCallingContainer {
   min-height: 600px;
