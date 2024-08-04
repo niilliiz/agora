@@ -1,11 +1,6 @@
 import styles from "./room.module.css";
 
-import AgoraRTC, {
-  useConnectionState,
-  useIsConnected,
-  usePublish,
-  useRTCClient,
-} from "agora-rtc-react";
+import { useIsConnected, usePublish, useRTCClient } from "agora-rtc-react";
 import MediaController from "@/app/components/media-controller";
 import { useEffect } from "react";
 import Container from "@/app/components/layout-components/container";
