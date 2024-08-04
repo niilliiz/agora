@@ -8,12 +8,20 @@
   border-radius: 4px;
 }
 
+.localVideoContainer > * {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
 .localCameraOffContainer {
   border: 1px solid #9eadad;
 }
 
 @media screen and (max-width: 600px) {
   .localVideoContainer {
+    right: 12px;
+    bottom: 12px;
     width: 200px;
     height: 150px;
   }

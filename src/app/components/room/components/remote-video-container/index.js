@@ -10,6 +10,7 @@ import {
 import UserState from "@/app/components/room/components/user-state";
 import CameraOffContainer from "@/app/components/camera-off";
 import { useEffect, useMemo, useState } from "react";
+import WaitingForRemoteUser from "@/app/components/room/components/waiting-for-remote";
 
 export default function RemoteVideoContainer({ client = {} }) {
   const [allowedRemoteUser, setAllowedRemoteUser] = useState(null);
@@ -90,7 +91,7 @@ export default function RemoteVideoContainer({ client = {} }) {
           );
         })
       ) : (
-        <div>wait</div>
+        <WaitingForRemoteUser />
       )}
     </div>
   );
