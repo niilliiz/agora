@@ -12,43 +12,41 @@ import CameraOffContainer from "@/app/components/camera-off";
 import { useEffect, useMemo, useState } from "react";
 
 export default function RemoteVideoContainer({ client = {} }) {
-  const [allowedRemoteUsers, setAllowedRemoteUsers] = useState(null);
+  const [allowedRemoteUser, setAllowedRemoteUser] = useState(null);
 
   const remoteUsers = useRemoteUsers();
   const rtcClient = useRTCClient();
-
-  const hasRemoteUser = useMemo(() => remoteUsers.length > 0, [remoteUsers.length]);
 
   const { videoTracks: remoteCameraTracks } = useRemoteVideoTracks(remoteUsers);
   const { audioTracks: remoteMicrophoneTracks } = useRemoteAudioTracks(remoteUsers);
 
   const userTracks = useMemo(() => {
-    if (!hasRemoteUser) return [];
+    if (!allowedRemoteUser) return [];
 
-    return remoteUsers.slice(0, 1).map(user => {
-      const videoTrack = remoteCameraTracks.find(track => track.getUserId() === user.uid);
-      const audioTrack = remoteMicrophoneTracks.find(track => track.getUserId() === user.uid);
+    const videoTrack = remoteCameraTracks.find(
+      track => track.getUserId() === allowedRemoteUser.uid,
+    );
+    const audioTrack = remoteMicrophoneTracks.find(
+      track => track.getUserId() === allowedRemoteUser.uid,
+    );
 
-      return {
-        user,
+    return [
+      {
+        user: allowedRemoteUser,
         videoTrack,
         audioTrack,
-      };
-    });
-  }, [remoteUsers, remoteCameraTracks, remoteMicrophoneTracks, hasRemoteUser]);
+      },
+    ];
+  }, [allowedRemoteUser, remoteCameraTracks, remoteMicrophoneTracks]);
 
   useEffect(() => {
     if (rtcClient) {
       const handleUserPublished = async (user, mediaType) => {
-        // Check if the current number of remote users is more than 1
-        if (remoteUsers.length > 1) {
-          // Unsubscribe from the newly published user's media
+        if (allowedRemoteUser === null && remoteUsers.length <= 1) {
+          setAllowedRemoteUser(user);
+        } else {
           await rtcClient.unsubscribe(user, mediaType);
           console.log("Unsubscribed from user due to limit:", user);
-        } else {
-          // Subscribe to the user's media if within limit
-          await rtcClient.subscribe(user, mediaType);
-          console.log("Subscribed to user:", user);
         }
       };
 
@@ -58,7 +56,21 @@ export default function RemoteVideoContainer({ client = {} }) {
         rtcClient.off("user-published", handleUserPublished);
       };
     }
-  }, [rtcClient, remoteUsers.length]);
+  }, [rtcClient, allowedRemoteUser, remoteUsers.length]);
+
+  useEffect(() => {
+    const handleUserLeft = user => {
+      if (allowedRemoteUser && user.uid === allowedRemoteUser.uid) {
+        setAllowedRemoteUser(null);
+      }
+    };
+
+    rtcClient.on("user-left", handleUserLeft);
+
+    return () => {
+      rtcClient.off("user-left", handleUserLeft);
+    };
+  }, [rtcClient, allowedRemoteUser]);
 
   useEffect(() => {
     remoteMicrophoneTracks.forEach(track => track.play());
