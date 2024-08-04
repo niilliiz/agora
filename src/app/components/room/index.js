@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import Container from "@/app/components/layout-components/container";
 import RemoteVideoContainer from "@/app/components/room/components/remote-video-container";
 import LocalVideoContainer from "@/app/components/room/components/local-video-container";
+import Timer from "@/app/components/timer";
 
 export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave, localTracks }) {
   const isConnected = useIsConnected();
@@ -39,6 +40,7 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave, 
         <div className={styles.videosWrapper}>
           {isConnected && (
             <>
+              <Timer className={styles.shortScreenTimer} />
               <RemoteVideoContainer />
 
               {/*Local Video Container*/}

@@ -5,6 +5,7 @@ import { appConfig } from "@/utils/app-config";
 import Room from "@/app/components/room";
 import Preview from "@/app/components/preview";
 import Container from "@/app/components/layout-components/container";
+import Timer from "@/app/components/timer";
 
 export default function VideoCall() {
   const [isCalling, setIsCalling] = useState(false);
@@ -92,7 +93,7 @@ export default function VideoCall() {
             </svg>
           </div>
           {/*  this is where other part of call header like support would be placed*/}
-          {isCalling && <div>countdown</div>}
+          {isCalling && <Timer className={styles.bigScreenTimer} />}
         </div>
       </Container>
       {!isCalling ? (
