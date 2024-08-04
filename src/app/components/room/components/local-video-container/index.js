@@ -11,7 +11,7 @@ export default function LocalVideoContainer({
 }) {
   return (
     <div className={styles.localVideoContainer}>
-      <CameraOffContainer />
+      <CameraOffContainer className={styles.localCameraOffContainer} />
       <UserState name="local" micOn={micOn} />
       <LocalVideoTrack track={localCameraTrack} play={cameraOn} disabled={!cameraOn} />
       <LocalAudioTrack track={localMicrophoneTrack} play={micOn} disabled={!micOn} />

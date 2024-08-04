@@ -8,6 +8,10 @@
   border-radius: 4px;
 }
 
+.localCameraOffContainer {
+  border: 1px solid #9eadad;
+}
+
 @media screen and (max-width: 600px) {
   .localVideoContainer {
     width: 200px;
