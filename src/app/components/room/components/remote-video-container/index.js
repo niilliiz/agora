@@ -84,7 +84,11 @@ export default function RemoteVideoContainer({ client = {} }) {
           return (
             <div key={user.uid}>
               <CameraOffContainer />
-              <UserState name="remote" micOn={user.hasAudio} />
+              <UserState
+                className={styles.userStateContainer}
+                name="remote"
+                micOn={user.hasAudio}
+              />
               <RemoteVideoTrack track={videoTrack} play={user.hasVideo} />
               <RemoteAudioTrack track={audioTrack} play={user.hasAudio} />
             </div>

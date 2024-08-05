@@ -1,8 +1,8 @@
 import styles from "./user-state.module.css";
 
-export default function UserState({ name = "", micOn }) {
+export default function UserState({ className = "", name = "", micOn }) {
   return (
-    <>
+    <div className={`${className}`}>
       <h6 className={styles.name}>{name}</h6>
       <div className={styles.micIcon}>
         {!micOn ? (
@@ -33,6 +33,6 @@ export default function UserState({ name = "", micOn }) {
           </svg>
         )}
       </div>
-    </>
+    </div>
   );
 }
