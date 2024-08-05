@@ -20,15 +20,15 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave, 
     onLeave();
   }
 
-  async function handleTracks() {
-    try {
-      await client.publish([localCameraTrack, localMicrophoneTrack]);
-    } catch (error) {
-      console.error(error, "while publishing track");
-    }
-  }
-
   useEffect(() => {
+    async function handleTracks() {
+      try {
+        await client.publish([localCameraTrack, localMicrophoneTrack]);
+      } catch (error) {
+        console.error(error, "while publishing track");
+      }
+    }
+
     if (isConnected && client) {
       handleTracks();
     }
@@ -47,7 +47,6 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave, 
               />
               <RemoteVideoContainer />
 
-              {/*Local Video Container*/}
               <LocalVideoContainer
                 cameraOn={cameraOn}
                 micOn={micOn}
