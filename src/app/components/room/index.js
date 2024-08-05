@@ -40,7 +40,11 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave, 
         <div className={styles.videosWrapper}>
           {isConnected && (
             <>
-              <Timer className={styles.shortScreenTimer} autoStart={isConnected} />
+              <Timer
+                className={styles.shortScreenTimer}
+                autoStart={isConnected}
+                remoteData="Remote Name"
+              />
               <RemoteVideoContainer />
 
               {/*Local Video Container*/}

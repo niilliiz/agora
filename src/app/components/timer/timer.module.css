@@ -1,7 +1,7 @@
 .timerContainer {
   color: #fff;
   background-color: rgba(255, 255, 255, 0.14);
-  padding: 7px 16px;
+  padding: 8px 16px;
   border-radius: 100px;
   cursor: pointer;
 }
@@ -13,7 +13,8 @@
 .timerContainer.warningTimer {
   background-color: #e62100;
 }
-.notExpandedContainer {
+
+.bigScreenTimer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,11 +27,109 @@
   line-height: 0;
 }
 
+.bigScreenTimer > .timeElementWrapper .timerContent {
+  color: #fff;
+}
+
+.bigScreenTimer > .timeElementWrapper svg path {
+  fill: #fff;
+}
+
+.bigScreenTimer > .timeElementWrapper svg {
+  width: 20px;
+  height: 20px;
+}
+
 .expandIcon {
   rotate: 0deg;
   transition: rotate 0.3s ease-in-out;
 }
 
-.expandIcon.isExpanded {
+.expandIcon.rotateX {
   rotate: 180deg;
+}
+
+.expandIcon.rotateY {
+  rotate: 180deg;
+}
+
+.shortScreenTimer {
+  display: none;
+}
+
+.timeElementWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.bigScreenTimer .extraInfo {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 600px) {
+  .timerContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0;
+    z-index: 20;
+    background-color: rgba(255, 255, 255, 0.14) !important;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bigScreenTimer {
+    display: none;
+  }
+  .shortScreenTimer {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .row {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .timeWrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .shortScreenTimer .timeWrapper .timeElementWrapper {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  .shortScreenTimer > .row .timeWrapper .timeElementWrapper .timerContent {
+    color: #526161;
+  }
+
+  .shortScreenTimer > .row .timeWrapper .timeElementWrapper svg path {
+    fill: #526161;
+  }
+
+  .shortScreenTimer > .row .timeWrapper .timeElementWrapper svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .remoteData {
+    font-weight: 500;
+    font-size: 14px;
+    color: #f1f3f3;
+  }
+
+  .shortScreenTimer .extraInfo {
+    font-size: 12px;
+  }
 }
