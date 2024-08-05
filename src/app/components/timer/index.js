@@ -10,13 +10,21 @@ function formatTime(value) {
   return value.toString().padStart(2, "0");
 }
 
+const User_Role = "doctor";
+
 export default function Timer({ className = "", autoStart, remoteData = "" }) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isOpenNoticeModal, setIsOpenNoticeModal] = useState(false);
 
   function handleEndTimer() {
     // todo
     // todo: if is doctor => show end session modal
     console.log("timer ended, what am i suppose to do?");
+    if (User_Role === "doctor") {
+      setIsOpenNoticeModal(true);
+    } else {
+      window.location.href = "https://nexu.co";
+    }
   }
   const { seconds, minutes, hours, days } = useTimer({
     expiryTimestamp: endTime,
