@@ -65,9 +65,7 @@ export default function Timer({ className = "", autoStart, remoteData = "" }) {
     >
       <div className={styles.bigScreenTimer}>
         {timeElement}
-
         {extraInfo}
-
         <svg
           className={`${styles.expandIcon} ${isExpanded ? styles.rotateX : ""}`}
           xmlns="http://www.w3.org/2000/svg"
