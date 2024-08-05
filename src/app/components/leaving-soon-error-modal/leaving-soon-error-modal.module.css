@@ -1,0 +1,45 @@
+.alarmIconContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background-color: #ffb34d;
+  border-radius: 100%;
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 16px;
+  max-width: 600px;
+  width: 95%;
+}
+
+.title {
+  color: #232929;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.description {
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.closeCTA {
+  padding: 8px 32px;
+  background-color: #232946;
+  color: #fff;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
