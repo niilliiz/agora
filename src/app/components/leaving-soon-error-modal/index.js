@@ -2,7 +2,7 @@ import styles from "./leaving-soon-error-modal.module.css";
 import Modal from "@/app/components/layout-components/modal";
 
 export default function LeavingSoonErrorModal({ isOpen, onClose }) {
-  function handleEndSession(e) {
+  function handleEndSession() {
     onClose();
   }
   return (
@@ -28,7 +28,7 @@ export default function LeavingSoonErrorModal({ isOpen, onClose }) {
         </div>
         <h2 className={styles.title}>End session?</h2>
         <div className={styles.description}>You are not able to end session before 5 minutes.</div>
-        <button onClick={e => handleEndSession(e)} className={styles.closeCTA}>
+        <button onClick={() => handleEndSession()} className={styles.closeCTA}>
           Got it
         </button>
       </div>
