@@ -1,8 +1,9 @@
 import styles from "./timer.module.css";
 import { useTimer } from "react-timer-hook";
 import { useState } from "react";
+import EndNoticeModal from "@/app/components/end-notice-modal";
 
-const endTime = 1722849567436;
+const endTime = 1722857623214;
 
 const Limited_Second = 300;
 
@@ -16,12 +17,19 @@ export default function Timer({ className = "", autoStart, remoteData = "" }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isOpenNoticeModal, setIsOpenNoticeModal] = useState(false);
 
+  function handleCloseEndNoticeModal() {
+    setIsOpenNoticeModal(false);
+  }
+
+  function handleOpenEndNoticeModal() {
+    setIsOpenNoticeModal(true);
+  }
+
   function handleEndTimer() {
     // todo
     // todo: if is doctor => show end session modal
-    console.log("timer ended, what am i suppose to do?");
     if (User_Role === "doctor") {
-      setIsOpenNoticeModal(true);
+      handleOpenEndNoticeModal();
     } else {
       window.location.href = "https://nexu.co";
     }
@@ -31,6 +39,8 @@ export default function Timer({ className = "", autoStart, remoteData = "" }) {
     autoStart: autoStart,
     onExpire: () => handleEndTimer(),
   });
+
+  console.log(seconds, minutes);
 
   function handleExpand() {
     setIsExpanded(prevIsExpanded => !prevIsExpanded);
@@ -67,49 +77,52 @@ export default function Timer({ className = "", autoStart, remoteData = "" }) {
   );
 
   return (
-    <div
-      className={`${styles.timerContainer} ${remainingTimeInSeconds < Limited_Second ? styles.warningTimer : ""} ${isExpanded ? styles.expandedContainer : ""} ${className}`}
-      onClick={() => handleExpand()}
-    >
-      <div className={styles.bigScreenTimer}>
-        {timeElement}
-        {extraInfo}
-        <svg
-          className={`${styles.expandIcon} ${isExpanded ? styles.rotateX : ""}`}
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 20 20"
-          fill="none"
-        >
-          <path
-            d="M14.1925 10.4422L7.94254 16.6922C7.88447 16.7502 7.81553 16.7963 7.73966 16.8277C7.66379 16.8592 7.58247 16.8753 7.50035 16.8753C7.41823 16.8753 7.33691 16.8592 7.26104 16.8277C7.18517 16.7963 7.11623 16.7502 7.05816 16.6922C7.00009 16.6341 6.95403 16.5652 6.9226 16.4893C6.89117 16.4134 6.875 16.3321 6.875 16.25C6.875 16.1679 6.89117 16.0865 6.9226 16.0107C6.95403 15.9348 7.00009 15.8659 7.05816 15.8078L12.8668 9.99998L7.05816 4.19217C6.94088 4.07489 6.875 3.91583 6.875 3.74998C6.875 3.58413 6.94088 3.42507 7.05816 3.30779C7.17544 3.19052 7.3345 3.12463 7.50035 3.12463C7.6662 3.12463 7.82526 3.19052 7.94254 3.30779L14.1925 9.55779C14.2506 9.61584 14.2967 9.68477 14.3282 9.76064C14.3597 9.83652 14.3758 9.91785 14.3758 9.99998C14.3758 10.0821 14.3597 10.1634 14.3282 10.2393C14.2967 10.3152 14.2506 10.3841 14.1925 10.4422Z"
-            fill="white"
-          />
-        </svg>
-      </div>
-      <div className={styles.shortScreenTimer}>
-        <div className={styles.row}>
-          <div className={styles.timeWrapper}>
-            {timeElement}
-            {remoteData && <span className={styles.remoteData}>{remoteData}</span>}
-          </div>
+    <>
+      <div
+        className={`${styles.timerContainer} ${remainingTimeInSeconds < Limited_Second ? styles.warningTimer : ""} ${isExpanded ? styles.expandedContainer : ""} ${className}`}
+        onClick={() => handleExpand()}
+      >
+        <div className={styles.bigScreenTimer}>
+          {timeElement}
+          {extraInfo}
           <svg
-            className={`${styles.expandIcon} ${isExpanded ? styles.rotateY : ""}`}
+            className={`${styles.expandIcon} ${isExpanded ? styles.rotateX : ""}`}
             xmlns="http://www.w3.org/2000/svg"
             width="20"
-            height="21"
-            viewBox="0 0 20 21"
+            height="20"
+            viewBox="0 0 20 20"
             fill="none"
           >
             <path
-              d="M16.6922 8.44217L10.4422 14.6922C10.3841 14.7503 10.3152 14.7964 10.2393 14.8278C10.1635 14.8593 10.0821 14.8755 10 14.8755C9.91786 14.8755 9.83653 14.8593 9.76066 14.8278C9.68478 14.7964 9.61585 14.7503 9.55781 14.6922L3.30781 8.44217C3.19053 8.32489 3.12465 8.16583 3.12465 7.99998C3.12465 7.83413 3.19053 7.67507 3.30781 7.55779C3.42508 7.44052 3.58414 7.37463 3.75 7.37463C3.91585 7.37463 4.07491 7.44052 4.19218 7.55779L10 13.3664L15.8078 7.55779C15.8659 7.49972 15.9348 7.45366 16.0107 7.42224C16.0866 7.39081 16.1679 7.37463 16.25 7.37463C16.3321 7.37463 16.4134 7.39081 16.4893 7.42224C16.5652 7.45366 16.6341 7.49972 16.6922 7.55779C16.7503 7.61586 16.7963 7.6848 16.8277 7.76067C16.8592 7.83654 16.8753 7.91786 16.8753 7.99998C16.8753 8.0821 16.8592 8.16342 16.8277 8.23929C16.7963 8.31516 16.7503 8.3841 16.6922 8.44217Z"
+              d="M14.1925 10.4422L7.94254 16.6922C7.88447 16.7502 7.81553 16.7963 7.73966 16.8277C7.66379 16.8592 7.58247 16.8753 7.50035 16.8753C7.41823 16.8753 7.33691 16.8592 7.26104 16.8277C7.18517 16.7963 7.11623 16.7502 7.05816 16.6922C7.00009 16.6341 6.95403 16.5652 6.9226 16.4893C6.89117 16.4134 6.875 16.3321 6.875 16.25C6.875 16.1679 6.89117 16.0865 6.9226 16.0107C6.95403 15.9348 7.00009 15.8659 7.05816 15.8078L12.8668 9.99998L7.05816 4.19217C6.94088 4.07489 6.875 3.91583 6.875 3.74998C6.875 3.58413 6.94088 3.42507 7.05816 3.30779C7.17544 3.19052 7.3345 3.12463 7.50035 3.12463C7.6662 3.12463 7.82526 3.19052 7.94254 3.30779L14.1925 9.55779C14.2506 9.61584 14.2967 9.68477 14.3282 9.76064C14.3597 9.83652 14.3758 9.91785 14.3758 9.99998C14.3758 10.0821 14.3597 10.1634 14.3282 10.2393C14.2967 10.3152 14.2506 10.3841 14.1925 10.4422Z"
               fill="white"
             />
           </svg>
         </div>
-        {extraInfo}
+        <div className={styles.shortScreenTimer}>
+          <div className={styles.row}>
+            <div className={styles.timeWrapper}>
+              {timeElement}
+              {remoteData && <span className={styles.remoteData}>{remoteData}</span>}
+            </div>
+            <svg
+              className={`${styles.expandIcon} ${isExpanded ? styles.rotateY : ""}`}
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="21"
+              viewBox="0 0 20 21"
+              fill="none"
+            >
+              <path
+                d="M16.6922 8.44217L10.4422 14.6922C10.3841 14.7503 10.3152 14.7964 10.2393 14.8278C10.1635 14.8593 10.0821 14.8755 10 14.8755C9.91786 14.8755 9.83653 14.8593 9.76066 14.8278C9.68478 14.7964 9.61585 14.7503 9.55781 14.6922L3.30781 8.44217C3.19053 8.32489 3.12465 8.16583 3.12465 7.99998C3.12465 7.83413 3.19053 7.67507 3.30781 7.55779C3.42508 7.44052 3.58414 7.37463 3.75 7.37463C3.91585 7.37463 4.07491 7.44052 4.19218 7.55779L10 13.3664L15.8078 7.55779C15.8659 7.49972 15.9348 7.45366 16.0107 7.42224C16.0866 7.39081 16.1679 7.37463 16.25 7.37463C16.3321 7.37463 16.4134 7.39081 16.4893 7.42224C16.5652 7.45366 16.6341 7.49972 16.6922 7.55779C16.7503 7.61586 16.7963 7.6848 16.8277 7.76067C16.8592 7.83654 16.8753 7.91786 16.8753 7.99998C16.8753 8.0821 16.8592 8.16342 16.8277 8.23929C16.7963 8.31516 16.7503 8.3841 16.6922 8.44217Z"
+                fill="white"
+              />
+            </svg>
+          </div>
+          {extraInfo}
+        </div>
       </div>
-    </div>
+      <EndNoticeModal isOpen={isOpenNoticeModal} onClose={() => handleCloseEndNoticeModal()} />
+    </>
   );
 }
