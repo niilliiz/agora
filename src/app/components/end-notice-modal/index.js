@@ -2,6 +2,15 @@ import Modal from "@/app/components/layout-components/modal";
 import styles from "./end-notice-modal.module.css";
 
 export default function EndNoticeModal({ isOpen, onClose }) {
+  // todo it doesn't get closed
+  function handleEndSession(e) {
+    e.stopPropagation();
+    window.close();
+    close();
+
+    onClose();
+  }
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className={styles.modalContent}>
@@ -30,7 +39,7 @@ export default function EndNoticeModal({ isOpen, onClose }) {
         <p className={styles.subDescription}>
           Provide your prescription, to receive your earnings.
         </p>
-        <button className={styles.closeCTA} onClick={onClose}>
+        <button onClick={e => handleEndSession(e)} className={styles.closeCTA}>
           Got it
         </button>
       </div>
