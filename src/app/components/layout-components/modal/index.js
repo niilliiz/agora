@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 
 import Backdrop from "@/app/components/layout-components/backddrop";
+import styles from "./modal.module.css";
 
 export default function Modal({ isOpen, onClose, children }) {
   function handleClickOnModalContainer(e) {
@@ -21,7 +22,7 @@ export default function Modal({ isOpen, onClose, children }) {
 
   return ReactDOM.createPortal(
     <Backdrop onAction={onClose}>
-      <div className="modalContainer" onClick={handleClickOnModalContainer}>
+      <div className={styles.modalContainer} onClick={handleClickOnModalContainer}>
         {children}
       </div>
     </Backdrop>,
