@@ -40,6 +40,7 @@ export default function VideoCall() {
       appid: appConfig.appId,
       channel: appConfig.channel,
       token: appConfig.token,
+      uid: (Math.random() * 1000).toString(20),
     },
     isCalling,
   );
