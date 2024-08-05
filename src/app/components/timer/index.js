@@ -2,10 +2,7 @@ import styles from "./timer.module.css";
 import { useTimer } from "react-timer-hook";
 import { useCallback, useState } from "react";
 import EndNoticeModal from "@/app/components/end-notice-modal";
-
-const endTime = 1722860733232;
-
-const Limited_Second = 300;
+import { Limited_Second } from "@/utils/static-values";
 
 function formatTime(value) {
   return value.toString().padStart(2, "0");
@@ -22,6 +19,8 @@ export default function Timer({ className = "", autoStart, remoteData = "" }) {
   function handleOpenEndNoticeModal() {
     setIsOpenNoticeModal(true);
   }
+
+  const endTime = Date.now() + 360 * 1000;
 
   function handleEndTimer() {
     if (User_Role === "doctor") {
