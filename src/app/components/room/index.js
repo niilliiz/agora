@@ -7,10 +7,13 @@ import Container from "@/app/components/layout-components/container";
 import RemoteVideoContainer from "@/app/components/room/components/remote-video-container";
 import LocalVideoContainer from "@/app/components/room/components/local-video-container";
 import Timer from "@/app/components/timer";
+import useWindowWidth from "@/hooks/useWindowWidth";
 
 export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave, localTracks }) {
   const isConnected = useIsConnected();
   const client = useRTCClient();
+
+  const [width] = useWindowWidth();
 
   const { localCameraTrack, localMicrophoneTrack } = localTracks;
 
@@ -40,11 +43,13 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave, 
         <div className={styles.videosWrapper}>
           {isConnected && (
             <>
-              <Timer
-                className={styles.shortScreenTimer}
-                autoStart={isConnected}
-                remoteData="Remote Name"
-              />
+              {width <= 600 && (
+                <Timer
+                  className={styles.shortScreenTimer}
+                  autoStart={isConnected}
+                  remoteData="Remote Name"
+                />
+              )}
               <RemoteVideoContainer />
 
               <LocalVideoContainer

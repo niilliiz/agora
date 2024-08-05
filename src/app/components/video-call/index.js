@@ -6,8 +6,10 @@ import Room from "@/app/components/room";
 import Preview from "@/app/components/preview";
 import Container from "@/app/components/layout-components/container";
 import Timer from "@/app/components/timer";
+import useWindowWidth from "@/hooks/useWindowWidth";
 
 export default function VideoCall() {
+  const [width] = useWindowWidth();
   const [isCalling, setIsCalling] = useState(false);
 
   const [micOn, setMicOn] = useState(false);
@@ -42,7 +44,6 @@ export default function VideoCall() {
     isCalling,
   );
 
-  console.log(data, "isCalling");
   function handleSetCamOn() {
     setCameraOn(prevCamera => !prevCamera);
   }
@@ -95,7 +96,7 @@ export default function VideoCall() {
             </svg>
           </div>
           {/*  this is where other part of call header like support would be placed*/}
-          {isCalling && (
+          {width > 600 && isCalling && (
             <Timer key={data} className={styles.bigScreenTimer} autoStart={isCalling} />
           )}
         </div>

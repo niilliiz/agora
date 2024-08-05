@@ -3,7 +3,7 @@ import { useTimer } from "react-timer-hook";
 import { useCallback, useState } from "react";
 import EndNoticeModal from "@/app/components/end-notice-modal";
 
-const endTime = 1722859881406;
+const endTime = 1722860733232;
 
 const Limited_Second = 300;
 
@@ -35,8 +35,6 @@ export default function Timer({ className = "", autoStart, remoteData = "" }) {
     autoStart: autoStart,
     onExpire: () => handleEndTimer(),
   });
-
-  console.log(seconds, minutes);
 
   function handleExpand() {
     setIsExpanded(prevIsExpanded => !prevIsExpanded);
