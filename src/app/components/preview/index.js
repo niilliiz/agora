@@ -1,5 +1,5 @@
 import styles from "./preview.module.css";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import AllowedContainer from "@/app/components/preview/components/allowed-container";
 import Container from "@/app/components/layout-components/container";
 import PendingPermissionModal from "@/app/components/preview/components/permission-pending-modal";
@@ -25,9 +25,7 @@ export default function Preview({
     setPermissionState(value);
   }
 
-  function handleClosePendingPermissionModal() {
-    setPendingPermissionModal(false);
-  }
+  const handleClosePendingPermissionModal = useCallback(() => setPendingPermissionModal(false), []);
 
   function handleOpenPendingPermissionModal() {
     setPendingPermissionModal(true);
@@ -64,9 +62,10 @@ export default function Preview({
           setLocalTracks={setLocalTracks}
           openPendingPermissionModal={() => handleOpenPendingPermissionModal()}
         />
-        {pendingPermissionModal && (
-          <PendingPermissionModal onClose={() => handleClosePendingPermissionModal()} />
-        )}
+        <PendingPermissionModal
+          isPermissionModalOpen={pendingPermissionModal}
+          onClose={() => handleClosePendingPermissionModal()}
+        />
       </div>
     </Container>
   );

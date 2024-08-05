@@ -2,16 +2,11 @@ import styles from "./permission-pending-modal.module.css";
 import Image from "next/image";
 
 import QRPicture from "../../../../../../public/img/download-app/qrCodeNew.png";
-import { useEffect, useRef } from "react";
-import Backdrop from "@/app/components/layout-components/backddrop";
+import Modal from "@/app/components/layout-components/modal";
 
-export default function PendingPermissionModal({ onClose }) {
-  // what does close icon do
-  // what does app icons do
-  // what ok,got it do
-
+export default function PendingPermissionModal({ onClose, isPermissionModalOpen }) {
   return (
-    <Backdrop onAction={onClose}>
+    <Modal onClose={onClose} isOpen={isPermissionModalOpen}>
       <div className={styles.modalContainer}>
         <div className={styles.modalHeader}>
           <button onClick={onClose}>
@@ -103,6 +98,6 @@ export default function PendingPermissionModal({ onClose }) {
           </div>
         </div>
       </div>
-    </Backdrop>
+    </Modal>
   );
 }
