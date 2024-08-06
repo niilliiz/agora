@@ -15,6 +15,8 @@ import LeavingSoonErrorModal from "@/app/components/leaving-soon-error-modal";
 const startTime = 1722881194378;
 const User_Role = "doctor";
 
+const data = {};
+
 export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave, localTracks }) {
   const [isLeavingSoonErrorModal, setIsLeavingSoonErrorModal] = useState(false);
   const [isOpenNoticeModal, setIsOpenNoticeModal] = useState(false);
@@ -103,6 +105,8 @@ export default function Room({ micOn, cameraOn, setMicOn, setCameraOn, onLeave, 
           </div>
 
           <MediaController
+            hasMoreInfoOption={true}
+            moreOptionInfo={data}
             isJoined
             micOn={micOn}
             cameraOn={cameraOn}
